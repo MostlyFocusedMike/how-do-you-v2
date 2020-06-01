@@ -1,0 +1,46 @@
+{
+  "name": "how-do-you-v2",
+  "description": "How to do a bunch of stuff in different languages",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MostlyFocusedMike/how-do-you-v2.git"
+  },
+  "version": "1.0.0",
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "start": "docker-compose up -d",
+    "build": "docker-compose exec srv1 npx webpack",
+    "watch": "docker-compose exec srv1 npx webpack --watch",
+    "in:srv": "docker-compose exec srv1 bash",
+    "in:db": "docker-compose exec pg1_db psql how_do_you_db root",
+    "migrate": "docker-compose exec srv1 npx knex migrate:latest",
+    "migrate:make": "npx knex migrate:make",
+    "rollback": "docker-compose exec srv1 npx knex migrate:rollback",
+    "seed": "docker-compose exec srv1 npx knex seed:run",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "express": "^4.17.1",
+    "html-webpack-plugin": "^3.2.0",
+    "knex": "^0.21.1",
+    "objection": "^2.1.5",
+    "pg": "^7.12.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.20.0",
+    "@typescript-eslint/parser": "^2.20.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-react": "^7.18.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  }
+}
