@@ -2,7 +2,7 @@
 exports.up = (knex) => {
     return knex.schema.createTable('languages', (table) => {
         table.increments().primary();
-        table.integer('name').unsigned().notNullable();
+        table.string('name').unsigned().notNullable();
         table.timestamp('created_at').defaultTo(knex.fn.now());
         table.timestamp('updated_at').defaultTo(knex.fn.now());
     });

@@ -12,9 +12,32 @@ class ObjectionBoiler extends Base {
             type: 'object',
             properties: {
                 id: { type: 'integer' },
-                name: { type: 'string' },
+                language_id: { type: 'integer' },
+                question_id: { type: 'integer' },
+                content: { type: 'string' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
+            },
+        };
+    }
+
+    static get relationMappings() {
+        return {
+            question: {
+                relation: Model.HasOneRelation,
+                modelClass: Path.join(__dirname, '..', 'question'),
+                join: {
+                    from: 'answers.question_id',
+                    to: 'questions.id',
+                },
+            },
+            language: {
+                relation: Model.HasOneRelation,
+                modelClass: Path.join(__dirname, '..', 'language'),
+                join: {
+                    from: 'answers.language_id',
+                    to: 'languages.id',
+                },
             },
         };
     }

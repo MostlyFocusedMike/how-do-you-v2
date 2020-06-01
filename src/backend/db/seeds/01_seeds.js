@@ -1,50 +1,64 @@
 /* eslint-disable no-await-in-loop */
 const User = require('../../models/user');
+const Category = require('../../models/category');
+const Language = require('../../models/language');
 
 exports.seed = async (knex) => {
-    await knex('tags').del();
     await knex('users').del();
+    await knex('categories').del();
+    await knex('languages').del();
 
-    // multiple create (all objects, even children must be new)
-    await User.create([
+    await User.create({
+        email: 'tom@gmail.com',
+        password: "$2b$08$CmU18c7KwY85qLiS6NBRR.r8Zb/K9hIVeFtPeXW/rFCzdVb4i0kxu",
+    });
+
+    const js = await Language.create({
+        name: 'JavaScript',
+    });
+    console.log('js: ', js);
+    await Category.createManyWithRelations([
         {
-            name: 'tom',
-            articles: [
+            name: 'Arrays/Lists',
+            questions: [
                 {
-                    title: 'I am the first article',
-                    tags: [
+                    content: 'Create a new array?',
+                    answers: [
                         {
-                            name: 'Beginners',
-                            slug: 'beginners',
-                        },
-                    ],
+                            content: 'Array.new(), []',
+                            language_id: js.id,
+                        }
+                    ]
                 },
                 {
-                    title: 'It is I, the second article',
-                    tags: [
+                    content: 'Show length of an array?',
+                    answers: [
                         {
-                            name: 'Advanced JavaScript',
-                            slug: 'advanced-javascript',
-                        },
-                        {
-                            name: 'Fun',
-                            slug: 'fun',
-                        },
-                    ],
+                            content: 'arr.length',
+                            language_id: js.id,
+                        }
+                    ]
                 },
-            ],
+            ]
         },
-    ]);
+        {
+            name: 'Objects/Hashes'
+        },
+        {
+            name: 'classes'
+        }
+    ])
 
     // see what was made
-    const users = await User.all();
-    for (let i = 0; i < users.length; i++) {
-        console.log('user: ', users[i]);
-        const articles = await users[i].relations('articles');
-        for (let j = 0; j < articles.length; j++) {
-            console.log(articles[j]);
-            const tags = await articles[j].relations('tags');
-            console.log(tags, '\n');
+    const categories = await Category.all();
+
+    for (let i = 0; i < categories.length; i++) {
+        console.log('category: ', categories[i]);
+        const questions = await categories[i].relations('questions');
+        for (let j = 0; j < questions.length; j++) {
+            console.log(questions[j]);
+            const answers = await questions[j].relations('answers');
+            console.log(answers);
         }
     }
 };

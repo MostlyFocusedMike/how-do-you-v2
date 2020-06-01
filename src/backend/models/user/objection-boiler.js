@@ -12,7 +12,8 @@ class ObjectionBoiler extends Base {
             type: 'object',
             properties: {
                 id: { type: 'integer' },
-                name: { type: 'string' },
+                email: { type: 'string' },
+                password: { type: 'string' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
             },

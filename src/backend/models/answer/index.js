@@ -1,7 +1,7 @@
 const ObjectionBoiler = require('./objection-boiler');
 
-class Tag extends ObjectionBoiler {
+class Answer extends ObjectionBoiler {
 
 }
 
-module.exports = Tag;
+module.exports = Answer;
