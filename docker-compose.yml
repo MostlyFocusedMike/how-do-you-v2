@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  srv1:
+    build: './'
+    command: nodemon src/backend/index.js
+    ports:
+      - '8001:8000'
+    environment:
+      DEV_DB_HOST: pg1_db
+      DEV_DB_PORT: 5432
+      DEV_DB_USER: root
+      DEV_DB_PSWD: root
+      DEV_DB_NAME: how_do_you_db
+      NODE_ENV: development
+      PORT: 8000
+    volumes:
+      - ./public/:/usr/app/public/
+      - ./src/:/usr/app/src/
+      - ./package.json:/usr/app/package.json
+      - ./tsconfig.json:/usr/app/tsconfig.json
+      - ./webpack.config.js:/usr/app/webpack.config.js
+    container_name: srv1_container
+
+  pg1_db:
+    image: postgres:9.6-alpine
+    ports:
+      - '5431:5432'
+    environment:
+      # these are PG builtin env vars
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: how_do_you_db
+
+    container_name: pg1_db_container
