@@ -3,7 +3,7 @@ version: "3"
 services:
   srv1:
     build: './'
-    command: nodemon src/backend/index.js
+    command: nodemon --watch src src/backend/index.js
     ports:
       - '8001:8000'
     environment:

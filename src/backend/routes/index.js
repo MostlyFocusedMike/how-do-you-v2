@@ -4,6 +4,7 @@
  */
 const addAllRoutes = (app) => {
     app.use(require('./users'));
+    app.use(require('./auth'));
 };
 
 module.exports = addAllRoutes;

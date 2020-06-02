@@ -1,2 +1,2 @@
-# Objection JS Starter
-This should function as a go to playground for objection.
+# How Do You...
+Just a bunch of common needs in various languages
