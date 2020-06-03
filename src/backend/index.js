@@ -5,7 +5,6 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
 
@@ -13,13 +12,15 @@ const User = require('./models/user');
 const addAllRoutes = require('./routes');
 
 passport.use(new LocalStrategy(
-    { usernameField: 'email' }, // 1 // username check
-    async (email, password, done) => { // 2
-        const dbUser = await User.findBy('email', email).then(r => r.json()); // 3
-        const user = dbUser[0] || {};
-        const passwordsDoMatch = await bcrypt.compare(password, user.password);
-        if (user.email && passwordsDoMatch) return done(null, user); // 4
-        return done(null, false, { message: 'Invalid credentials.\n' }); // 5
+    { usernameField: 'email' },
+    async (email, password, done) => {
+        console.log('email: ', email);
+        const dbUser = await User.findBy('email', email);
+        console.log('dbUser: ', dbUser);
+        if (!dbUser) return done(null, false, {message: 'no User\n'})
+        const passwordsDoMatch = await bcrypt.compare(password, dbUser.password);
+        if (dbUser.email && passwordsDoMatch) return done(null, dbUser);
+        return done(null, false, { message: 'Invalid credentials.\n' });
     },
 ));
 
@@ -32,7 +33,6 @@ passport.deserializeUser((userId, done) => {
     console.log('in deserialize: ');
     console.log('userId: ', userId);
     User.find(userId)
-        .then(r => r.json())
         .then(user => done(null, user))
         .catch(error => done(error, false));
 });
