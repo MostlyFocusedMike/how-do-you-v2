@@ -67,6 +67,12 @@ app.use(passport.session());
 const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
 app.use(staticFiles);
 
+// catchall
+app.get('*', (req, res, next) => {
+    if (req.originalUrl.includes('/api')) return next();
+    res.sendFile(path.join(__dirname, '..', '..', 'build', 'index.html'))
+})
+
 addAllRoutes(app);
 
 const port = process.env.PORT || 8000;
