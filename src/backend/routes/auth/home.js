@@ -1,5 +1,5 @@
 const userHandler = (router) => {
-    router.get('/', (req, res) => {
+    router.get('/home', (req, res) => {
         console.log('req.session.views: ', req.session.views);
         // req.session is where you store any info you want
         if (req.session.views) {

@@ -1,11 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Routes from "./routes";
 
-import Hello from './components/Hello';
-console.log('hi')
 ReactDOM.render(
-    <div>
-        <Hello compiler="TypeScript" framework="React" />
-    </div>,
+    <Routes />,
     document.getElementById("main")
 );

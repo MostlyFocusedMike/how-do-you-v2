@@ -64,14 +64,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// set up static files router
-// const options = {
-//     setHeaders: (res, path, stat) => { // eslint-disable-line no-shadow
-//         res.set('x-timestamp', Date.now());
-//     },
-// };
-// const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'), options);
-// app.use(staticFiles);
+const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
+app.use(staticFiles);
 
 addAllRoutes(app);
 
