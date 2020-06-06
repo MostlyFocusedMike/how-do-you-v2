@@ -1,4 +1,9 @@
-const fetcher = (url: string, options?: RequestInit ) => fetch(url, options).then(r => r.json());
+const fetcher = async (url: string, options?: RequestInit ) => {
+    const res = await fetch(url, options)
+    const body = await res.json();
+    if (res.ok) return body;
+    return { err: res.statusText, status: res.status, body }
+};
 
 interface loginInterface {
     email: string;
