@@ -1,7 +1,7 @@
 const checkIfAuthenticatedMiddleware = require('../../middleware/check-auth');
 
 const handler = (router) => {
-    router.get('/auth-required', checkIfAuthenticatedMiddleware, (req, res) => {
+    router.get('/api/v1/auth-required', checkIfAuthenticatedMiddleware, (req, res) => {
         console.log('in /auth-required: ');
         const sessionData = JSON.stringify({
             reqSession: req.session,

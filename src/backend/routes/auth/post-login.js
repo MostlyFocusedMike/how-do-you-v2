@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 const handler = (router) => {
-    router.post('/log-in', (req, res, next) => {
+    router.post('/api/v1/login', (req, res, next) => {
         console.log('Inside POST /custom-login');
 
         const authFunc = (err, user, info) => {

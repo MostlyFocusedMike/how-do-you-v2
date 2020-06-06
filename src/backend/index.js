@@ -11,6 +11,10 @@ const flash = require('connect-flash');
 const User = require('./models/user');
 const addAllRoutes = require('./routes');
 
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 passport.use(new LocalStrategy(
     { usernameField: 'email' },
     async (email, password, done) => {
@@ -36,10 +40,6 @@ passport.deserializeUser((userId, done) => {
         .then(user => done(null, user))
         .catch(error => done(error, false));
 });
-
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.set('etag', false);
 app.use((req, res, next) => {
