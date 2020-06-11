@@ -21,7 +21,7 @@ const LoginPage: React.FC = ()=> {
         setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value})
     }
 
-    if (isLoginSuccess) return <Redirect to='/home' />
+    if (isLoginSuccess) return <Redirect to='/' />
 
     return (
         <form onSubmit={handleSubmit}>
