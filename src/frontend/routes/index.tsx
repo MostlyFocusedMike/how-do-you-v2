@@ -7,26 +7,13 @@ import {
 } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
+import MainNavBar from '../components/MainNavBar';
 
 
 const Routes = () => {
     return (
         <Router>
-            <div>
-            <nav>
-                <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/login">Login</Link>
-                </li>
-                <li>
-                    <Link to="/profile">Profile</Link>
-                </li>
-                </ul>
-            </nav>
-            </div>
+            <MainNavBar />
             <Switch>
                 <Route path="/login" component={ LoginPage } />
                 <Route path="/" component={ HomePage }>
