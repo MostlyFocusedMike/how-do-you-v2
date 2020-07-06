@@ -8,6 +8,7 @@ import {
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import MainNavBar from '../components/MainNavBar';
+import UserProfilePage from '../pages/UserProfilePage';
 
 
 const Routes = () => {
@@ -15,9 +16,9 @@ const Routes = () => {
         <Router>
             <MainNavBar />
             <Switch>
+                <Route path="/" exact component={ HomePage } />
                 <Route path="/login" component={ LoginPage } />
-                <Route path="/" component={ HomePage }>
-                </Route>
+                <Route path="/profile" component={ UserProfilePage } />
             </Switch>
         </Router>
     )
