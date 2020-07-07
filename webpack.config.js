@@ -22,6 +22,9 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
 
+    watchOptions: {
+        poll: true,
+    },
     module: {
         rules: [
             {

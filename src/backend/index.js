@@ -7,6 +7,11 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const flash = require('connect-flash');
+const webpackDevMiddleware = require("webpack-dev-middleware");
+const webpack = require("webpack");
+const webpackConfig = require('../../webpack.config');
+
+const compiler = webpack(webpackConfig);
 
 const User = require('./models/user');
 const addAllRoutes = require('./routes');
@@ -64,8 +69,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
-app.use(staticFiles);
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: '/' // <--- this has to be the same publicPath that you inserted on your webpack config, otherwise you could leave this as /
+}))
+// const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
+// app.use(staticFiles);
 
 // catchall
 app.get('*', (req, res, next) => {
