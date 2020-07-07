@@ -71,7 +71,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 if (process.env.NODE_ENV !== 'production') {
-    app.use(webpackDevMiddleware(compiler))
+    app.use(webpackDevMiddleware(compiler, {
+        noInfo: true,
+        publicPath: webpackConfig.output.publicPath
+    }));
+
+    app.use(require('webpack-hot-middleware')(compiler, {
+        log: console.log,
+        path: '/__webpack_hmr',
+        heartbeat: 10 * 1000
+    }));
 } else {
     const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
     app.use(staticFiles);

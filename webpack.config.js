@@ -6,7 +6,7 @@ console.log(process.env.NODE_ENV === 'development' ? 'development' : 'production
 
 module.exports = {
     entry: {
-        main: './src/frontend/index.tsx',
+        main: ['react-hot-loader/patch', './src/frontend/index.tsx', 'webpack-hot-middleware/client'],
     },
     output: {
         path: path.resolve(__dirname, 'build'),
@@ -21,16 +21,12 @@ module.exports = {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
-
-    watchOptions: {
-        poll: true,
-    },
     module: {
         rules: [
             {
                 test: /\.ts(x?)$/,
                 exclude: /node_modules/,
-                use: ['ts-loader'],
+                use: ['react-hot-loader/webpack', 'ts-loader'],
             },
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
@@ -50,5 +46,6 @@ module.exports = {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
             },
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 };
