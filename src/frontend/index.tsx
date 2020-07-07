@@ -1,11 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-import Hello from './components/Hello';
+import Routes from "./routes";
 
 ReactDOM.render(
-    <div>
-        <Hello compiler="TypeScript" framework="React" />
-    </div>,
+    <Routes />,
     document.getElementById("main")
 );
+
+// @ts-ignore
+if (module.hot) {
+    // @ts-ignore
+    module.hot.accept('./routes', () => {
+      ReactDOM.render(<Routes />, document.getElementById('main'));
+    })
+}
