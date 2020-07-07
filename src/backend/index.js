@@ -15,6 +15,7 @@ const compiler = webpack(webpackConfig);
 
 const User = require('./models/user');
 const addAllRoutes = require('./routes');
+const { production } = require('../../knexfile');
 
 const app = express();
 app.use(express.json());
@@ -69,11 +70,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: '/' // <--- this has to be the same publicPath that you inserted on your webpack config, otherwise you could leave this as /
-}))
-// const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
-// app.use(staticFiles);
+if (process.env.NODE_ENV !== 'production') {
+    app.use(webpackDevMiddleware(compiler))
+} else {
+    const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
+    app.use(staticFiles);
+}
 
 // catchall
 app.get('*', (req, res, next) => {

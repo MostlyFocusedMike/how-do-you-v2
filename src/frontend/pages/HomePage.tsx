@@ -3,7 +3,7 @@ import React from 'react';
 const HomePage: React.FC = ()=> {
     return (
         <form>
-            <h1>Home!</h1>
+            <h1>Home! here</h1>
         </form>
     )
 }
