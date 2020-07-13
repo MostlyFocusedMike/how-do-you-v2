@@ -1,15 +1,17 @@
 const checkIfAuthenticatedMiddleware = require('../../middleware/check-authenticated');
-const checkIfAuthorizedMiddleware = require('../../middleware/check-authorized');
+const checkIfAuthorizedMiddleware = require('../../middleware/check-permissions');
 
 const userHandler = (router) => {
     router.get(
         '/api/users/:id',
         checkIfAuthenticatedMiddleware,
-        checkIfAuthorizedMiddleware,
+        // checkIfAuthorizedMiddleware(),
         (req, res) => {
             const userId = req.params.id;
             console.log(`/users/${userId} hit!`);
-            res.send({ id: userId, msg: `user ${userId} would go here.` });
+            req.models.User.find(userId).then(user => {
+                res.send(user);
+            })
         }
     );
 };
