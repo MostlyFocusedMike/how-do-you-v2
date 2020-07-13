@@ -1,4 +1,4 @@
-const checkIfAuthenticatedMiddleware = require('../../middleware/check-auth');
+const checkIfAuthenticatedMiddleware = require('../../middleware/check-authenticated');
 
 const handler = (router) => {
     router.get('/api/v1/auth-required', checkIfAuthenticatedMiddleware, (req, res) => {

@@ -13,6 +13,11 @@ exports.seed = async (knex) => {
         password: "$2b$08$CmU18c7KwY85qLiS6NBRR.r8Zb/K9hIVeFtPeXW/rFCzdVb4i0kxu",
     });
 
+    await User.create({
+        email: 'bo@gmail.com',
+        password: "$2b$08$CmU18c7KwY85qLiS6NBRR.r8Zb/K9hIVeFtPeXW/rFCzdVb4i0kxu",
+    });
+
     const js = await Language.create({
         name: 'JavaScript',
     });
