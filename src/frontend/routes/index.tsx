@@ -3,13 +3,11 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
 } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import LoginPage from '../pages/LoginPage';
 import MainNavBar from '../components/MainNavBar';
 import UserProfilePage from '../pages/UserProfilePage';
-
 
 const Routes = () => {
     return (
