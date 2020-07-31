@@ -73,14 +73,11 @@ app.use(passport.session());
 if (process.env.NODE_ENV !== 'production') {
     app.use(webpackDevMiddleware(compiler, {
         noInfo: true,
-        publicPath: webpackConfig.output.publicPath
+        publicPath: webpackConfig.output.publicPath,
+        writeToDisk: true, // we need this for refreshing the front end url
     }));
 
-    app.use(require('webpack-hot-middleware')(compiler, {
-        log: console.log,
-        path: '/__webpack_hmr',
-        heartbeat: 10 * 1000
-    }));
+    app.use(require('webpack-hot-middleware')(compiler));
 } else {
     const staticFiles = express.static(path.join(__dirname, '..', '..', 'build'));
     app.use(staticFiles);

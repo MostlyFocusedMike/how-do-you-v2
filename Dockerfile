@@ -17,6 +17,6 @@ COPY ./tsconfig.json ./
 
 RUN npm install -g nodemon
 RUN npm i
-RUN npx webpack
+# RUN npx webpack
 
 CMD ["node", "./src/backend/server.js"]
