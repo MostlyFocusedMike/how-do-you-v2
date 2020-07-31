@@ -1,9 +1,4 @@
-const fetcher = async (url: string, options?: RequestInit ) => {
-    const res = await fetch(url, options)
-    const body = await res.json();
-    if (res.ok) return body;
-    return { err: res.statusText, status: res.status, body }
-};
+import fetcher from '../util/fetcher'
 
 interface loginInterface {
     email: string;
@@ -22,7 +17,7 @@ const authAdapter = {
             }
         };
         console.log('options: ', options);
-        return fetcher('api/v1/login', options);
+        return fetcher('/api/v1/login', options);
     }
 }
 
