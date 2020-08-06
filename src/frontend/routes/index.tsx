@@ -4,10 +4,11 @@ import {
     Switch,
     Route,
 } from 'react-router-dom';
-import HomePage from '../pages/HomePage';
+
 import LoginPage from '../pages/LoginPage';
 import MainNavBar from '../components/MainNavBar';
 import UserProfilePage from '../pages/UserProfilePage';
+import HomePage from '../pages/HomePage';
 
 const Routes = () => {
     return (
@@ -19,7 +20,7 @@ const Routes = () => {
                 <Route path="/profile/:id" component={ UserProfilePage } />
             </Switch>
         </Router>
-    )
+    );
 };
 
 export default Routes;
