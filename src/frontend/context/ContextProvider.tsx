@@ -8,13 +8,13 @@ interface ContextProps {
 const ContextProvider: React.FC<ContextProps> = ({ children }) => {
     const context = {
         test: 'hello there',
-    }
+    };
 
     return (
         <AppContext.Provider value={ context }>
             {children}
         </AppContext.Provider>
     );
-}
+};
 
 export default ContextProvider;

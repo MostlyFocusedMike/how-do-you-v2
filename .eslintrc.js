@@ -26,8 +26,9 @@ module.exports = {
         "@typescript-eslint"
     ],
     rules: {
+        "import/extensions": 'off',
         "react/prop-types": 0,
-        "indent": ["error", 4],
+        "indent": ["off", 4],
         "no-unused-vars": ["warn", { "vars": "local", "args": "none" }],
         "no-plusplus": 0,
         "max-len": ["warn", 180],

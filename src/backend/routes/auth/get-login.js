@@ -5,10 +5,10 @@ const handler = (router) => {
         if (req.isAuthenticated()) return res.redirect('/auth-required');
         console.log('req.body: ', req.body);
         const error = req.flash('error')[0]; // seems flash can only be called once so store it
-        res.send(`
+        return res.send(`
         <h1>Log in</h1>
         <form method="POST" action="/log-in">
-            <p style="color: red;">${error ? `Login error: ${error}`: ''}</p>
+            <p style="color: red;">${error ? `Login error: ${error}` : ''}</p>
             <label for="email">Email:</label>
             <input type="text" id="email" name="email"/>
             <label for="password">Password:</label>
@@ -17,6 +17,6 @@ const handler = (router) => {
         </form>
         `);
     });
-}
+};
 
 module.exports = handler;
