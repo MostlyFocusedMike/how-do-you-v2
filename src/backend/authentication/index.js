@@ -12,7 +12,7 @@ const addAuth = (app) => {
         { usernameField: 'email' },
         async (email, password, done) => {
             const dbUser = await User.findBy('email', email);
-            if (!dbUser) return done(null, false, {message: 'no User\n'})
+            if (!dbUser) return done(null, false, { message: 'no User\n' });
             const passwordsDoMatch = await bcrypt.compare(password, dbUser.password);
             if (dbUser.email && passwordsDoMatch) return done(null, dbUser);
             return done(null, false, { message: 'Invalid credentials.\n' });
@@ -47,6 +47,6 @@ const addAuth = (app) => {
 
     app.use(passport.initialize());
     app.use(passport.session());
-}
+};
 
 module.exports = addAuth;

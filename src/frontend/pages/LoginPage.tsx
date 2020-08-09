@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import authAdapter from '../adapters/auth-adapter'
-import { Redirect } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import authAdapter from '../adapters/auth-adapter';
 
 const LoginPage: React.FC = ()=> {
     const [formData, setFormData] = useState({
@@ -11,17 +11,17 @@ const LoginPage: React.FC = ()=> {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const res = await authAdapter.login(formData)
-        console.log('res:', res)
+        const res = await authAdapter.login(formData);
+        console.log('res:', res);
         if (!res.err) setIsLoginSuccess(true);
-    }
+    };
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
         e.preventDefault();
-        setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value})
-    }
+        setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
+    };
 
-    if (isLoginSuccess) return <Redirect to='/' />
+    if (isLoginSuccess) return <Redirect to='/' />;
 
     return (
         <form onSubmit={handleSubmit}>

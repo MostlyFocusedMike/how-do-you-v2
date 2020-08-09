@@ -1,4 +1,4 @@
-import fetcher from '../util/fetcher'
+import fetcher from '../util/fetcher';
 
 interface loginInterface {
     email: string;
@@ -13,12 +13,12 @@ const authAdapter = {
             credentials: 'include',
             headers: {
                 accepts: 'application/json',
-                "Content-Type": "application/json"
-            }
+                'Content-Type': 'application/json',
+            },
         };
         console.log('options: ', options);
         return fetcher('/api/v1/login', options);
-    }
-}
+    },
+};
 
-export default authAdapter
+export default authAdapter;

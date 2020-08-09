@@ -4,7 +4,7 @@ const checkIfAuthorizedMiddleware = require('../../middleware/check-permissions'
 const userHandler = (router) => {
     router.get(
         '/api/v1/users/:id',
-        // checkIfAuthenticatedMiddleware,
+        checkIfAuthenticatedMiddleware,
         // checkIfAuthorizedMiddleware(),
         (req, res) => {
             const userId = req.params.id;
@@ -13,8 +13,8 @@ const userHandler = (router) => {
                 .find(userId)
                 .then(user => {
                     res.send(user);
-                })
-        }
+                });
+        },
     );
 };
 
