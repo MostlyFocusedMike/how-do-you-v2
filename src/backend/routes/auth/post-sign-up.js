@@ -4,7 +4,7 @@ const User = require('../../models/user');
 const handler = (router) => {
     router.post('/sign-up', async (req, res, next) => {
         console.log('Inside POST /sign-up');
-        const {email, password} = req.body;
+        const { email, password } = req.body;
         console.log('req.body: ', req.body);
         if (!password || !email) res.send('Please enter an email and password');
 

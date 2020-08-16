@@ -5,6 +5,6 @@ const handler = (router) => {
         console.log('req', req.isAuthenticated());
         res.redirect('/');
     });
-}
+};
 
 module.exports = handler;

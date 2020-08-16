@@ -3,7 +3,7 @@ const passport = require('passport');
 const handler = (router) => {
     router.post('/api/v1/login', (req, res, next) => {
         console.log('Inside POST /login');
-
+        console.log('passport: ', passport);
         const authFunc = (err, user, info) => {
             console.log('Inside passport.authenticate() callback');
             console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
@@ -12,7 +12,7 @@ const handler = (router) => {
             if (!user) return res.status(401).json({ err: 'Could not log in' });
             req.logIn(user, (err2) => {
                 console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-                return res.json({ msg: `user: ${JSON.stringify(user)} was logged in` });
+                return res.json({ id: user.id });
             });
         };
         passport.authenticate('local', authFunc)(req, res, next);
