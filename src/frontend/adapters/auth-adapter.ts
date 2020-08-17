@@ -19,6 +19,18 @@ const authAdapter = {
         console.log('options: ', options);
         return fetcher('/api/v1/login', options);
     },
+
+    reauth: async () => {
+        const options: RequestInit = {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                accepts: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        };
+        return fetcher('/api/v1/reauth', options);
+    },
 };
 
 export default authAdapter;

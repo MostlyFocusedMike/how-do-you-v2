@@ -1,4 +1,5 @@
 import React, { ReactNode, useState } from 'react';
+import authAdapter from '../adapters/auth-adapter';
 import AppContext from '.';
 
 const CURRENT_USER_ID = 'currentUserId';
@@ -15,7 +16,9 @@ const ContextProvider: React.FC<ContextProps> = ({ children }) => {
         setCurrentUserId(userId);
     };
 
-    const checkIfLoggedIn = () => {
+    const checkIfLoggedIn = async () => {
+        const cookie = await authAdapter.reauth();
+        console.log('cookie', cookie);
         const savedUserId = localStorage.getItem(CURRENT_USER_ID);
         if (savedUserId) handleLogin(parseInt(savedUserId, 10));
     };
