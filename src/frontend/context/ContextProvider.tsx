@@ -23,6 +23,7 @@ const ContextProvider: React.FC<ContextProps> = ({ children }) => {
     const context = {
         test: 'hello there',
         currentUserId,
+        setCurrentUserId,
         handleLogin,
         checkIfLoggedIn,
     };

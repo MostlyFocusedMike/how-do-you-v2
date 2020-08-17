@@ -6,5 +6,6 @@ const router = express.Router();
 require('./post-logout')(router);
 require('./post-login')(router);
 require('./post-sign-up')(router);
+require('./get-reauth')(router);
 
 module.exports = router;
