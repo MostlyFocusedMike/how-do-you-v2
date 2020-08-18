@@ -2,33 +2,33 @@ import React, { ReactNode, useState } from 'react';
 import authAdapter from '../adapters/auth-adapter';
 import AppContext from '.';
 
-const CURRENT_USER_ID = 'currentUserId';
-
 interface ContextProps {
     children: ReactNode;
 }
 
-const ContextProvider: React.FC<ContextProps> = ({ children }) => {
-    const [currentUserId, setCurrentUserId] = useState<null | number>(null);
+interface UserDataInterface {
+    id: number,
+    email: string,
+    role: string,
+}
 
-    const handleLogin = (userId: number) => {
-        localStorage.setItem(CURRENT_USER_ID, userId.toString());
-        setCurrentUserId(userId);
-    };
+const ContextProvider: React.FC<ContextProps> = ({ children }) => {
+    const [currentUser, setCurrentUser] = useState<null | UserDataInterface>(null);
 
     const checkIfLoggedIn = async () => {
-        const cookie = await authAdapter.reauth();
-        console.log('cookie', cookie);
-        const savedUserId = localStorage.getItem(CURRENT_USER_ID);
-        if (savedUserId) handleLogin(parseInt(savedUserId, 10));
+        const cookieData = await authAdapter.reauth();
+        if (cookieData) setCurrentUser(cookieData);
+    };
+
+    const handleLogIn = (userData: UserDataInterface) => {
+        setCurrentUser(userData);
     };
 
     const context = {
-        test: 'hello there',
-        currentUserId,
-        setCurrentUserId,
-        handleLogin,
+        currentUser,
+        setCurrentUser,
         checkIfLoggedIn,
+        handleLogIn,
     };
 
     return (

@@ -6,16 +6,13 @@ const handler = (router) => {
         console.log('passport: ', passport);
         const authFunc = (err, user, info) => {
             console.log('Inside passport.authenticate() callback');
-            console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-            console.log(`req.user outside: ${JSON.stringify(user)}`);
-            console.log('info: ', info);
-            console.log('req.user: ', req.user);
             if (err) res.json({ err: 'Something just went wrong' });
             if (!user) return res.status(401).json({ err: 'Could not log in' });
             req.logIn(user, (err2) => {
+                console.log('user: ', user);
                 console.log('req.user inside: ', req.user);
                 console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-                return res.json({ id: user.id });
+                return res.json({ id: user.id, email: user.email, role: user.role });
             });
         };
         passport.authenticate('local', authFunc)(req, res, next);

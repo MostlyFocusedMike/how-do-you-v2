@@ -3,7 +3,7 @@ const handler = (router) => {
         console.log('logout: ');
         req.logout();
         console.log('req', req.isAuthenticated());
-        res.redirect('/');
+        res.json({ msg: 'Logged out' });
     });
 };
 

@@ -1,4 +1,5 @@
-import fetcher from '../util/fetcher'
+import fetcher from '../util/fetcher';
+import { UserDataInterface } from '../util/interfaces';
 
 const userAdapter = {
     getOne: async (userId: number) => {
@@ -7,11 +8,11 @@ const userAdapter = {
             credentials: 'include',
             headers: {
                 accepts: 'application/json',
-                "Content-Type": "application/json"
-            }
+                'Content-Type': 'application/json',
+            },
         };
-        return fetcher(`/api/v1/users/${userId}`, options);
-    }
-}
+        return fetcher<UserDataInterface>(`/api/v1/users/${userId}`, options);
+    },
+};
 
-export default userAdapter
+export default userAdapter;

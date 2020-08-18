@@ -4,7 +4,7 @@ import authAdapter from '../adapters/auth-adapter';
 import AppContext from '../context';
 
 const LoginPage: React.FC = () => {
-    const { currentUserId, setCurrentUserId } = useContext(AppContext);
+    const { currentUser, handleLogin, test } = useContext(AppContext);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -13,8 +13,11 @@ const LoginPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await authAdapter.login(formData);
-        console.log('res:', res);
-        if (!res.err) setCurrentUserId(res.id);
+        if (res) {
+            console.log('hi', test);
+            console.log('hi', handleLogin);
+            // handleLogin(res);
+        }
     };
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -22,7 +25,7 @@ const LoginPage: React.FC = () => {
         setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
     };
 
-    if (currentUserId) return <Redirect to='/' />;
+    if (currentUser) return <Redirect to='/' />;
 
     return (
         <form onSubmit={handleSubmit}>

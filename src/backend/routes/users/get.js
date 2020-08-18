@@ -9,6 +9,7 @@ const userHandler = (router) => {
         (req, res) => {
             const userId = req.params.id;
             console.log(`/users/${userId} hit!`);
+            console.log('req.session: ', req.session);
             req.models.User
                 .find(userId)
                 .then(user => {
