@@ -1,15 +1,10 @@
 import React, { ReactNode, useState } from 'react';
 import authAdapter from '../adapters/auth-adapter';
 import AppContext from '.';
+import { UserDataInterface, ContextInterface } from '../util/interfaces';
 
 interface ContextProps {
     children: ReactNode;
-}
-
-interface UserDataInterface {
-    id: number,
-    email: string,
-    role: string,
 }
 
 const ContextProvider: React.FC<ContextProps> = ({ children }) => {
@@ -20,15 +15,15 @@ const ContextProvider: React.FC<ContextProps> = ({ children }) => {
         if (cookieData) setCurrentUser(cookieData);
     };
 
-    const handleLogIn = (userData: UserDataInterface) => {
+    const handleLogin = (userData: UserDataInterface) => {
         setCurrentUser(userData);
     };
 
-    const context = {
+    const context: ContextInterface = {
         currentUser,
         setCurrentUser,
         checkIfLoggedIn,
-        handleLogIn,
+        handleLogin,
     };
 
     return (

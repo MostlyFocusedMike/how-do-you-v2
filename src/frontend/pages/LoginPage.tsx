@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import authAdapter from '../adapters/auth-adapter';
 import AppContext from '../context';
+import { ContextInterface } from '../util/interfaces';
 
 const LoginPage: React.FC = () => {
-    const { currentUser, handleLogin, test } = useContext(AppContext);
+    const { currentUser, handleLogin } = useContext<ContextInterface>(AppContext);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -13,11 +14,7 @@ const LoginPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await authAdapter.login(formData);
-        if (res) {
-            console.log('hi', test);
-            console.log('hi', handleLogin);
-            // handleLogin(res);
-        }
+        if (res) handleLogin(res);
     };
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {

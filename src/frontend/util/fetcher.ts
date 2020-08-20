@@ -1,9 +1,3 @@
-interface FetchErrorInterface {
-    err: string;
-    status: number;
-    body: any;
-}
-
 const fetcher = async <FetchData>(url: string, options?: RequestInit) => {
     const res = await fetch(url, options);
     const body: FetchData = await res.json();
