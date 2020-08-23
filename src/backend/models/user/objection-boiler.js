@@ -13,6 +13,7 @@ class ObjectionBoiler extends Base {
             properties: {
                 id: { type: 'integer' },
                 email: { type: 'string' },
+                role: { type: 'string' },
                 password: { type: 'string' },
                 created_at: { type: 'date' },
                 updated_at: { type: 'date' },
@@ -31,6 +32,10 @@ class ObjectionBoiler extends Base {
                 },
             },
         };
+    }
+
+    get includedProperties() {
+        return ['id', 'email', 'role'];
     }
 }
 

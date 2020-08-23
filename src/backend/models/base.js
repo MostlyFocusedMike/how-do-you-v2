@@ -29,25 +29,25 @@ class Base extends Model {
     }
 
     static async createWithRelations(itemToCreate) { // returns a single object created
-        if (Array.isArray(itemToCreate)) throw new Error('Please use createManyWithRelations')
+        if (Array.isArray(itemToCreate)) throw new Error('Please use createManyWithRelations');
         return this.query().insertGraph(itemToCreate).returning('*');
     }
 
     static async createManyWithRelations(itemsToCreate) { // returns an array of all objects created
-        if (!Array.isArray(itemsToCreate)) throw new Error('Please use createWithRelations')
+        if (!Array.isArray(itemsToCreate)) throw new Error('Please use createWithRelations');
         return this.query().insertGraph(itemsToCreate).returning('*');
     }
 
     static async create(itemToCreate) { // create with no relations, returns object created
-        return await this.query().insert(itemToCreate).returning('*'); // you can do this if you're using postrgres, check docs
+        return this.query().insert(itemToCreate).returning('*'); // you can do this if you're using postrgres, check docs
     }
 
     static async delete(id) {
-        return this.query().deleteById(id)
+        return this.query().deleteById(id);
     }
 
     static async deleteWhere(column, value, operator = '=') {
-        return await this.query().delete().where(column, operator, value);
+        return this.query().delete().where(column, operator, value);
     }
 
     static async update(itemId, updateProperties) {
@@ -56,12 +56,22 @@ class Base extends Model {
 
 
     // the following methods are for the actual instances of the model
+    sanitized() {
+        const modelProperties = {};
+        for (let i = 0; i < this.includedProperties.length; i++) {
+            console.log('this.includedProperties: ', this.includedProperties);
+            const propertyName = this.includedProperties[i];
+            modelProperties[propertyName] = this[propertyName];
+        }
+        return modelProperties;
+    }
+
     async delete() {
-        return this.$query().deleteById(this.id)
+        return this.$query().deleteById(this.id);
     }
 
     async update(updateProperties) {
-        return await this.$query().patch(updateProperties);
+        return this.$query().patch(updateProperties);
     }
 
     async addRelations(relationName, relationObjOrObjs) {

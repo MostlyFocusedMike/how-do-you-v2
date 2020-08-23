@@ -1,5 +1,4 @@
 const checkIfAuthenticatedMiddleware = require('../../middleware/check-authenticated');
-const checkIfAuthorizedMiddleware = require('../../middleware/check-permissions');
 
 const userHandler = (router) => {
     router.get(
@@ -13,7 +12,8 @@ const userHandler = (router) => {
             req.models.User
                 .find(userId)
                 .then(user => {
-                    res.send(user);
+                    console.log('user.sanitize(): ', user.sanitized());
+                    res.send(user.sanitized());
                 });
         },
     );
