@@ -2,10 +2,9 @@ import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import authAdapter from '../adapters/auth-adapter';
 import AppContext from '../context';
-import { ContextInterface } from '../util/interfaces';
 
 const LoginPage: React.FC = () => {
-    const { currentUser, handleLogin } = useContext<ContextInterface>(AppContext);
+    const { loggedInUser, handleLogin } = useContext(AppContext);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -22,7 +21,7 @@ const LoginPage: React.FC = () => {
         setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
     };
 
-    if (currentUser) return <Redirect to='/' />;
+    if (loggedInUser) return <Redirect to='/' />;
 
     return (
         <form onSubmit={handleSubmit}>

@@ -8,20 +8,20 @@ interface ContextProps {
 }
 
 const ContextProvider: React.FC<ContextProps> = ({ children }) => {
-    const [currentUser, setCurrentUser] = useState<null | UserDataInterface>(null);
+    const [loggedInUser, setLoggedInUser] = useState<null | UserDataInterface>(null);
 
     const checkIfLoggedIn = async () => {
         const cookieData = await authAdapter.reauth();
-        if (cookieData) setCurrentUser(cookieData);
+        if (cookieData) setLoggedInUser(cookieData);
     };
 
     const handleLogin = (userData: UserDataInterface) => {
-        setCurrentUser(userData);
+        setLoggedInUser(userData);
     };
 
     const context: ContextInterface = {
-        currentUser,
-        setCurrentUser,
+        loggedInUser,
+        setLoggedInUser,
         checkIfLoggedIn,
         handleLogin,
     };

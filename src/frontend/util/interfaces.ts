@@ -5,8 +5,8 @@ export interface UserDataInterface {
 }
 
 export interface ContextInterface {
-    currentUser: null | UserDataInterface;
-    setCurrentUser: (user: UserDataInterface) => void;
+    loggedInUser: null | UserDataInterface;
+    setLoggedInUser: (user: UserDataInterface) => void;
     checkIfLoggedIn: () => void;
     handleLogin: (user: UserDataInterface) => void;
 }

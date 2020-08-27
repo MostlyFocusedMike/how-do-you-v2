@@ -3,21 +3,20 @@ import {
     Link,
 } from 'react-router-dom';
 import AppContext from '../context';
-import { ContextInterface } from '../util/interfaces';
 
 // you don't need to include the JSX.Element, that's implied
 // components have to return a JSX.Element or null
 const MainNavBar: React.FC = () => {
-    const { currentUser } = useContext<ContextInterface>(AppContext);
+    const { loggedInUser } = useContext(AppContext);
 
     useEffect(() => {
-        console.log('currentUser: ', currentUser);
-    }, [currentUser]);
+        console.log('loggedInUser: ', loggedInUser);
+    }, [loggedInUser]);
 
     const currentProfile = () => {
-        if (!currentUser) return null;
+        if (!loggedInUser) return null;
         return (<li>
-            <Link to={`/profile/${currentUser.id}`}>{currentUser.email}</Link>
+            <Link to={`/profile/${loggedInUser.id}`}>{loggedInUser.email}</Link>
         </li>);
     };
 

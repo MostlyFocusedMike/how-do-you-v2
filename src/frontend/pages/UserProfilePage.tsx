@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { RouteComponentProps } from 'react-router';
 import userAdapter from '../adapters/user-adapter';
 import { UserDataInterface } from '../util/interfaces';
+import AppContext from '../context';
 
 interface MatchParams {
     id: string;
@@ -10,19 +11,38 @@ interface MatchParams {
 interface MatchProps extends RouteComponentProps<MatchParams> {
 }
 const UserProfilePage: React.FC<MatchProps> = ({ match }) => {
-    const [user, setUser] = useState<UserDataInterface|null>(null);
+    const [pageUser, setPageUser] = useState<UserDataInterface|null>(null);
+    const [isSameUser, setIsSameUser] = useState(false);
+    const { loggedInUser } = useContext(AppContext);
 
     useEffect(() => {
         userAdapter
             .getOne(parseInt(match.params.id, 10))
-            .then(setUser);
+            .then(setPageUser);
     }, []);
 
     useEffect(() => {
-        console.log('user:', user);
-    }, [user]);
+        console.log('loggedInUser in the page: ', loggedInUser);
+        if (pageUser && loggedInUser) setIsSameUser(pageUser.id === loggedInUser.id);
+    }, [pageUser, loggedInUser]);
 
-    return <h1>User Page</h1>;
+    useEffect(() => {
+        console.log('pageUser:', pageUser);
+    }, [pageUser]);
+
+    const handleLogout = () => {
+        console.log('clicked: ');
+    };
+
+    if (!pageUser) return null;
+    return (<div>
+        <h1>User Page</h1>
+        <p>Email: {pageUser.email}</p>
+        <p>Role: {pageUser.role}</p>
+        {
+            isSameUser && <button onClick={handleLogout}>Log Out</button>
+        }
+    </div>);
 };
 
 export default UserProfilePage;
