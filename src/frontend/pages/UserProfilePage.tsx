@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { RouteComponentProps } from 'react-router';
 import userAdapter from '../adapters/user-adapter';
+import authAdapter from '../adapters/auth-adapter';
 import { UserDataInterface } from '../util/interfaces';
 import AppContext from '../context';
 
@@ -30,8 +31,10 @@ const UserProfilePage: React.FC<MatchProps> = ({ match }) => {
         console.log('pageUser:', pageUser);
     }, [pageUser]);
 
-    const handleLogout = () => {
+    const handleLogout = async (e: React.FormEvent<HTMLButtonElement>) => {
         console.log('clicked: ');
+        const logger = await authAdapter.logout();
+        console.log('logger: ', logger);
     };
 
     if (!pageUser) return null;

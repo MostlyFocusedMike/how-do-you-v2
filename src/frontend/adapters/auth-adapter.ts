@@ -20,6 +20,18 @@ const authAdapter = {
         return fetcher<UserDataInterface>('/api/v1/login', options);
     },
 
+    logout: async () => {
+        const options: RequestInit = {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                accepts: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        };
+        return fetcher<UserDataInterface>('/api/v1/logout', options);
+    },
+
     reauth: async () => {
         const options: RequestInit = {
             method: 'GET',

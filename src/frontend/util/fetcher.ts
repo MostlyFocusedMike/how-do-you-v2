@@ -1,8 +1,15 @@
 const fetcher = async <FetchData>(url: string, options?: RequestInit) => {
     const res = await fetch(url, options);
-    const body: FetchData = await res.json();
-    if (res.ok) return body;
-    console.log({ err: res.statusText, status: res.status, body }); // TODO: proper error alert
+    const text = await res.text();
+    if (res.ok) {
+        try {
+            const body = JSON.parse(text);
+            return body;
+        } catch (e) {
+            return text;
+        }
+    }
+    console.log({ err: res.statusText, status: res.status, text }); // TODO: proper error alert
     return null;
 };
 
