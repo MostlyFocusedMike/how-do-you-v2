@@ -5,7 +5,7 @@ import { ContextInterface } from './util/interfaces';
 
 
 const App = () => {
-    const { checkIfLoggedIn } = useContext<ContextInterface>(AppContext);
+    const { checkIfLoggedIn } = useContext(AppContext);
     useEffect(() => {
         checkIfLoggedIn();
     }, []);
