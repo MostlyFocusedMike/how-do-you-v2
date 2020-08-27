@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps, Redirect } from 'react-router';
 import userAdapter from '../adapters/user-adapter';
 import authAdapter from '../adapters/auth-adapter';
 import { UserDataInterface } from '../util/interfaces';
@@ -14,7 +14,8 @@ interface MatchProps extends RouteComponentProps<MatchParams> {
 const UserProfilePage: React.FC<MatchProps> = ({ match }) => {
     const [pageUser, setPageUser] = useState<UserDataInterface|null>(null);
     const [isSameUser, setIsSameUser] = useState(false);
-    const { loggedInUser } = useContext(AppContext);
+    const [redirect, setRedirect] = useState(false);
+    const { loggedInUser, handleLogoutUser } = useContext(AppContext);
 
     useEffect(() => {
         userAdapter
@@ -35,9 +36,12 @@ const UserProfilePage: React.FC<MatchProps> = ({ match }) => {
         console.log('clicked: ');
         const logger = await authAdapter.logout();
         console.log('logger: ', logger);
+        setRedirect(true);
+        handleLogoutUser();
     };
 
     if (!pageUser) return null;
+    if (redirect) return <Redirect to='/' />;
     return (<div>
         <h1>User Page</h1>
         <p>Email: {pageUser.email}</p>

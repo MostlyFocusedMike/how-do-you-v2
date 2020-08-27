@@ -4,7 +4,7 @@ import authAdapter from '../adapters/auth-adapter';
 import AppContext from '../context';
 
 const LoginPage: React.FC = () => {
-    const { loggedInUser, handleLogin } = useContext(AppContext);
+    const { loggedInUser, handleLoginUser } = useContext(AppContext);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -13,7 +13,7 @@ const LoginPage: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const res = await authAdapter.login(formData);
-        if (res) handleLogin(res);
+        if (res) handleLoginUser(res);
     };
 
     const handleChange = (e: React.FormEvent<HTMLInputElement>) => {

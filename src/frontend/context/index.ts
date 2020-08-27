@@ -5,7 +5,8 @@ const AppContext = React.createContext<ContextInterface>({
     loggedInUser: null,
     setLoggedInUser: () => {},
     checkIfLoggedIn: () => {},
-    handleLogin: () => {},
+    handleLoginUser: () => {},
+    handleLogoutUser: () => {},
 });
 
 export default AppContext;

@@ -15,15 +15,20 @@ const ContextProvider: React.FC<ContextProps> = ({ children }) => {
         if (cookieData) setLoggedInUser(cookieData);
     };
 
-    const handleLogin = (userData: UserDataInterface) => {
+    const handleLoginUser = (userData: UserDataInterface) => {
         setLoggedInUser(userData);
+    };
+
+    const handleLogoutUser = () => {
+        setLoggedInUser(null);
     };
 
     const context: ContextInterface = {
         loggedInUser,
         setLoggedInUser,
         checkIfLoggedIn,
-        handleLogin,
+        handleLoginUser,
+        handleLogoutUser,
     };
 
     return (
