@@ -10,7 +10,7 @@ exports.seed = async (knex) => {
 
     await User.create({
         email: 'tom@gmail.com',
-        password: "$2b$08$CmU18c7KwY85qLiS6NBRR.r8Zb/K9hIVeFtPeXW/rFCzdVb4i0kxu",
+        password: "$2b$08$CmU18c7KwY85qLiS6NBRR.r8Zb/K9hIVeFtPeXW/rFCzdVb4i0kxu", // is 'password'
         role: 'admin',
     });
 
@@ -34,8 +34,8 @@ exports.seed = async (knex) => {
                         {
                             content: 'Array.new(), []',
                             language_id: js.id,
-                        }
-                    ]
+                        },
+                    ],
                 },
                 {
                     content: 'Show length of an array?',
@@ -43,18 +43,18 @@ exports.seed = async (knex) => {
                         {
                             content: 'arr.length',
                             language_id: js.id,
-                        }
-                    ]
+                        },
+                    ],
                 },
-            ]
+            ],
         },
         {
-            name: 'Objects/Hashes'
+            name: 'Objects/Hashes',
         },
         {
-            name: 'classes'
-        }
-    ])
+            name: 'classes',
+        },
+    ]);
 
     // see what was made
     const categories = await Category.all();

@@ -47,5 +47,6 @@ module.exports = {
         'arrow-parens': 'off',
         'global-require': 'off',
         'consistent-return': 'off',
+        'array-callback-return': 'off',
     },
 };
