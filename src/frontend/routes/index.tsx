@@ -8,17 +8,17 @@ import {
 import LoginPage from '../pages/LoginPage';
 import MainNavBar from '../components/MainNavBar';
 import UserProfilePage from '../pages/UserProfilePage';
-import HomePage from '../pages/HomePage';
+import MainPage from '../pages/MainPage';
 
 const Routes = () => {
     return (
         <Router>
             <MainNavBar />
             <Switch>
-                <Route path="/" exact component={ HomePage } />
+                <Route path="/" exact component={ MainPage } />
                 <Route path="/login" component={ LoginPage } />
                 <Route path="/users/:id" component={ UserProfilePage } />
-                <Route path="*" exact component={ HomePage } />
+                <Route path="*" exact component={ MainPage } />
             </Switch>
         </Router>
     );

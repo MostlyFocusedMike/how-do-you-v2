@@ -8,6 +8,7 @@ const addAllRoutes = (app) => {
     addStatic(app);
     app.use(require('../middleware/add-models'));
     app.use(require('./users'));
+    app.use(require('./categories'));
     app.use(require('./auth'));
 };
 
