@@ -16,7 +16,7 @@ const MainNavBar: React.FC = () => {
     const currentProfile = () => {
         if (!loggedInUser) return null;
         return (<li>
-            <Link to={`/profile/${loggedInUser.id}`}>{loggedInUser.email}</Link>
+            <Link to={`/users/${loggedInUser.id}`}>{loggedInUser.email}</Link>
         </li>);
     };
 

@@ -1,15 +1,14 @@
 const fetcher = async <FetchData>(url: string, options?: RequestInit) => {
     const res = await fetch(url, options);
-    const text = await res.text();
     if (res.ok) {
         try {
-            const body = JSON.parse(text);
+            const body: FetchData = await res.json();
             return body;
         } catch (e) {
-            return text;
+            console.log("API for some reason rturned string. Please don't do that");
         }
     }
-    console.log({ err: res.statusText, status: res.status, text }); // TODO: proper error alert
+    console.log({ err: res }); // TODO: proper error alert
     return null;
 };
 

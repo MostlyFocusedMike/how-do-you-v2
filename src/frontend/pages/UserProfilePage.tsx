@@ -21,7 +21,7 @@ const UserProfilePage: React.FC<MatchProps> = ({ match }) => {
         userAdapter
             .getOne(parseInt(match.params.id, 10))
             .then(setPageUser);
-    }, []);
+    }, [match.params.id]);
 
     useEffect(() => {
         console.log('loggedInUser in the page: ', loggedInUser);

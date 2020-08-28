@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
         setFormData({ ...formData, [e.currentTarget.name]: e.currentTarget.value });
     };
 
-    if (loggedInUser) return <Redirect to='/' />;
+    if (loggedInUser) return <Redirect to={`/users/${loggedInUser.id}`} />;
 
     return (
         <form onSubmit={handleSubmit}>

@@ -12,6 +12,7 @@
     "start": "docker-compose up -d",
     "build": "docker-compose exec srv1 npx webpack",
     "watch": "docker-compose exec srv1 npx webpack --watch",
+    "logs": "docker-compose logs -f",
     "in:srv": "docker-compose exec srv1 bash",
     "in:db": "docker-compose exec pg1_db psql how_do_you_db root",
     "migrate": "docker-compose exec srv1 npx knex migrate:latest",
