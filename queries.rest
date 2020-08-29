@@ -1,0 +1,19 @@
+http://localhost:8001/api/v1/categories?full=true
+
+
+#######################################
+
+http://localhost:8001/api/v1/users/2
+
+
+#####################
+POST http://localhost:8001/api/v1/login
+Content-Type: application/json
+
+{
+    "email":"bo@gmail.com",
+    "password": "password"
+}
+
+#####################
+POST http://localhost:8001/api/v1/logout
