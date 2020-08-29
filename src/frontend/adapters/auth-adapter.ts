@@ -1,5 +1,5 @@
 import fetcher from '../util/fetcher';
-import { UserDataInterface } from '../util/interfaces';
+import { UserInterface } from '../util/interfaces';
 
 interface loginInterface {
     email: string;
@@ -17,7 +17,7 @@ const authAdapter = {
                 'Content-Type': 'application/json',
             },
         };
-        return fetcher<UserDataInterface>('/api/v1/login', options);
+        return fetcher<UserInterface>('/api/v1/login', options);
     },
 
     logout: async () => {
@@ -29,7 +29,7 @@ const authAdapter = {
                 'Content-Type': 'application/json',
             },
         };
-        return fetcher<UserDataInterface>('/api/v1/logout', options);
+        return fetcher<UserInterface>('/api/v1/logout', options);
     },
 
     reauth: async () => {
@@ -42,7 +42,7 @@ const authAdapter = {
             },
         };
 
-        return fetcher<UserDataInterface>('/api/v1/reauth', options);
+        return fetcher<UserInterface>('/api/v1/reauth', options);
     },
 };
 

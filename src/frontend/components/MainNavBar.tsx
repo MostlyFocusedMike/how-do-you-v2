@@ -13,22 +13,15 @@ const MainNavBar: React.FC = () => {
 
     const currentProfile = () => {
         if (!loggedInUser) return null;
-        return (<li>
-            <Link to={`/users/${loggedInUser.id}`}>{loggedInUser.email}</Link>
-        </li>);
+        return (<Link to={`/users/${loggedInUser.id}`}>{loggedInUser.email}</Link>);
     };
 
     return (
         <nav>
-            <ul>
-                <li>
-                    <Link to='/'>Main</Link>
-                </li>
-                <li>
-                    <Link to='/login'>Login</Link>
-                </li>
-                {currentProfile()}
-            </ul>
+            <Link to='/'>Home</Link>
+            <Link to='/login'>Login</Link>
+            <Link to='/categories'>Categories</Link>
+            {currentProfile()}
         </nav>
     );
 };

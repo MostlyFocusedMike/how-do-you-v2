@@ -2,26 +2,26 @@ import React, { useEffect, useState, useContext } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router';
 import userAdapter from '../adapters/user-adapter';
 import authAdapter from '../adapters/auth-adapter';
-import { UserDataInterface } from '../util/interfaces';
+import { UserInterface } from '../util/interfaces';
 import AppContext from '../context';
 
 interface MatchParams {
-    id: string;
+    userId: string;
 }
 
 interface MatchProps extends RouteComponentProps<MatchParams> {
 }
 const UserProfilePage: React.FC<MatchProps> = ({ match }) => {
-    const [pageUser, setPageUser] = useState<UserDataInterface|null>(null);
+    const [pageUser, setPageUser] = useState<UserInterface|null>(null);
     const [isSameUser, setIsSameUser] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const { loggedInUser, handleLogoutUser } = useContext(AppContext);
 
     useEffect(() => {
         userAdapter
-            .getOne(parseInt(match.params.id, 10))
+            .getOne(parseInt(match.params.userId, 10))
             .then(setPageUser);
-    }, [match.params.id]);
+    }, [match.params.userId]);
 
     useEffect(() => {
         console.log('loggedInUser in the page: ', loggedInUser);

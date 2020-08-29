@@ -1,8 +1,8 @@
 import fetcher from '../util/fetcher';
-import { UserInterface } from '../util/interfaces';
+import { CategoryInterface } from '../util/interfaces';
 
-const userAdapter = {
-    getOne: async (userId: number) => {
+const categoryAdapter = {
+    getAll: async () => {
         const options: RequestInit = {
             method: 'GET',
             credentials: 'include',
@@ -11,8 +11,8 @@ const userAdapter = {
                 'Content-Type': 'application/json',
             },
         };
-        return fetcher<UserInterface>(`/api/v1/users/${userId}`, options);
+        return fetcher<CategoryInterface[]>('/api/v1/categories', options);
     },
 };
 
-export default userAdapter;
+export default categoryAdapter;

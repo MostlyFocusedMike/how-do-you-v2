@@ -1,21 +1,21 @@
 import React, { ReactNode, useState } from 'react';
 import authAdapter from '../adapters/auth-adapter';
 import AppContext from '.';
-import { UserDataInterface, ContextInterface } from '../util/interfaces';
+import { UserInterface, ContextInterface } from '../util/interfaces';
 
 interface ContextProps {
     children: ReactNode;
 }
 
 const ContextProvider: React.FC<ContextProps> = ({ children }) => {
-    const [loggedInUser, setLoggedInUser] = useState<null | UserDataInterface>(null);
+    const [loggedInUser, setLoggedInUser] = useState<null | UserInterface>(null);
 
     const checkIfLoggedIn = async () => {
         const cookieData = await authAdapter.reauth();
         if (cookieData) setLoggedInUser(cookieData);
     };
 
-    const handleLoginUser = (userData: UserDataInterface) => {
+    const handleLoginUser = (userData: UserInterface) => {
         setLoggedInUser(userData);
     };
 
