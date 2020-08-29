@@ -20,7 +20,7 @@ const MainNavBar: React.FC = () => {
         <nav>
             <Link to='/'>Home</Link>
             <Link to='/login'>Login</Link>
-            <Link to='/categories'>Categories</Link>
+            <Link to='/categories/1'>Categories</Link>
             {currentProfile()}
         </nav>
     );

@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import categoryAdapter from '../adapters/category-adapter';
-import { CategoryInterface } from '../util/interfaces';
+import { RouteComponentProps, Redirect } from 'react-router';
 
-const Category: React.FC = () => {
+interface MatchParams {
+    categoryId: string;
+}
 
+interface MatchProps extends RouteComponentProps<MatchParams> {
+}
+
+const Category: React.FC<MatchProps> = ({ match }) => {
+    useEffect(() => {
+        console.log('match: ', match.params.categoryId);
+    });
     return (
         <h1>lookkkkkk</h1>
     );

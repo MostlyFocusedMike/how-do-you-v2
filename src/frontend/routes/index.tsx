@@ -9,7 +9,7 @@ import LoginPage from '../pages/LoginPage';
 import MainNavBar from '../components/MainNavBar';
 import UserProfilePage from '../pages/UserProfilePage';
 import HomePage from '../pages/HomePage';
-import CategoriesPage from '../pages/MainPage';
+import CategoriesPage from '../pages/CategoriesPage';
 
 const Routes = () => {
     return (
@@ -19,7 +19,7 @@ const Routes = () => {
                 <Route path="/" exact component={ HomePage } />
                 <Route path="/login" component={ LoginPage } />
                 <Route path="/users/:userId" component={ UserProfilePage } />
-                <Route path="/categories" component={ CategoriesPage } />
+                <Route path="/categories/:categoryId" component={ CategoriesPage } />
                 <Route path="*" exact component={ HomePage } />
             </Switch>
         </Router>
