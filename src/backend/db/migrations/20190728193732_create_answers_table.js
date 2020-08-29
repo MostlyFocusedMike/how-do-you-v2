@@ -2,7 +2,8 @@
 exports.up = (knex) => {
     return knex.schema.createTable('answers', (table) => {
         table.increments().primary();
-        table.string('content').notNullable();
+        table.string('code').notNullable();
+        table.string('text').defaultTo('');
         table.integer('language_id').unsigned().notNullable();
         table.foreign('language_id').references('id').inTable('languages').onDelete('CASCADE'); // cascade deletes this join when the foreign row is deleted
         table.integer('question_id').unsigned().notNullable();

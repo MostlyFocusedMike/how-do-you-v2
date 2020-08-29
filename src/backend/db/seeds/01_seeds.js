@@ -32,7 +32,8 @@ exports.seed = async (knex) => {
                     content: 'Create a new array?',
                     answers: [
                         {
-                            content: 'Array.new(), []',
+                            code: 'Array.new(), []',
+                            text: 'same as ever',
                             language_id: js.id,
                         },
                     ],
@@ -41,7 +42,7 @@ exports.seed = async (knex) => {
                     content: 'Show length of an array?',
                     answers: [
                         {
-                            content: 'arr.length',
+                            code: 'arr.length',
                             language_id: js.id,
                         },
                     ],
