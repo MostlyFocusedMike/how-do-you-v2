@@ -22,6 +22,7 @@ const Answer: React.FC<propsInterface> = ({ answer }) => {
         };
         setup();
     }, []);
+
     if (!langHash) return null;
     return <ol className="answer" key={answer.id}>
         <p>lang: {langHash[answer.languageId]}</p>
