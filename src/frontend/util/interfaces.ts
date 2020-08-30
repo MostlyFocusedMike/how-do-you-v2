@@ -1,7 +1,7 @@
 interface baseModelInterface {
     id: number;
-    updated_at?: string;
-    created_at?: string;
+    updatedAt?: string;
+    createdAt?: string;
 }
 
 
@@ -12,6 +12,7 @@ export interface UserInterface extends baseModelInterface {
 
 export interface CategoryInterface extends baseModelInterface {
     name: string;
+    questions?: QuestionInterface[];
 }
 
 export interface QuestionInterface extends baseModelInterface {
@@ -23,6 +24,12 @@ export interface AnswerInterface extends baseModelInterface {
     id: number;
     code: string;
     text: string;
+    languageId: number;
+    questionId: number;
+}
+
+export interface LanguageInterface extends baseModelInterface {
+    name: string;
 }
 
 export interface ContextInterface {

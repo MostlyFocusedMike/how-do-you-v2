@@ -1,9 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { RouteComponentProps, Redirect } from 'react-router';
+import { CategoryInterface, QuestionInterface } from '../util/interfaces';
 
-const Category: React.FC = () => {
+interface propsInterface {
+    categoryQuestions: QuestionInterface[]
+}
+
+const Category: React.FC<propsInterface> = ({ categoryQuestions }) => {
+
     return (
-        <h1>lookkkkkk</h1>
+        <ul>
+            {
+                categoryQuestions.map(question => {
+                    return <ol key={question.id}><h1>{question.content}</h1></ol>;
+                })
+            }
+        </ul>
     );
 };
 

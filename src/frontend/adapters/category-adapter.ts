@@ -12,11 +12,10 @@ const optionsForGet: RequestInit = {
 
 const categoryAdapter = {
     getAll: async () => {
-
         return fetcher<CategoryInterface[]>('/api/v1/categories', optionsForGet);
     },
-    getAllQuestionsForCategory: async () => {
-        return fetcher<CategoryInterface[]>('/api/v1/categories', optionsForGet);
+    getAllQuestionsForCategory: async (categoryId: number) => {
+        return fetcher<QuestionInterface[]>(`/api/v1/categories/${categoryId}/questions`, optionsForGet);
     },
 };
 
