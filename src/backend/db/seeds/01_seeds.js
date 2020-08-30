@@ -23,7 +23,13 @@ exports.seed = async (knex) => {
     const js = await Language.create({
         name: 'JavaScript',
     });
+
+    const py = await Language.create({
+        name: 'Python',
+    });
+
     console.log('js: ', js);
+    console.log('py: ', py);
     await Category.createManyWithRelations([
         {
             name: 'Arrays/Lists',
@@ -35,6 +41,11 @@ exports.seed = async (knex) => {
                             code: 'Array.new(), []',
                             text: 'same as ever',
                             language_id: js.id,
+                        },
+                        {
+                            code: 'arr = []',
+                            text: 'standard',
+                            language_id: py.id,
                         },
                     ],
                 },
@@ -51,6 +62,18 @@ exports.seed = async (knex) => {
         },
         {
             name: 'Objects/Hashes',
+            questions: [
+                {
+                    content: 'Create a new object?',
+                    answers: [
+                        {
+                            code: '{}',
+                            text: 'the usual',
+                            language_id: js.id,
+                        },
+                    ],
+                },
+            ],
         },
         {
             name: 'classes',

@@ -20,6 +20,11 @@ export interface QuestionInterface extends baseModelInterface {
     answers?: AnswerInterface[];
 }
 
+export interface QuestionWithAnswersInterface extends baseModelInterface {
+    content: string;
+    answers: AnswerInterface[];
+}
+
 export interface AnswerInterface extends baseModelInterface {
     id: number;
     code: string;
