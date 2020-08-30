@@ -10,5 +10,6 @@ router.use((req, res, next) => {
 
 // routes
 require('./list')(router);
+require('./list-questions-by-category')(router);
 
 module.exports = router;

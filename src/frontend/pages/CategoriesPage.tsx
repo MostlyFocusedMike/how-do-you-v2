@@ -10,12 +10,15 @@ interface MatchParams {
 interface MatchProps extends RouteComponentProps<MatchParams> {
 }
 
-const CategoriesPage: React.FC<MatchProps> = (props) => {
+const CategoriesPage: React.FC<MatchProps> = ({ match }) => {
+    useEffect(() => {
+        console.log('match: ', match);
+    }, [match]);
     return (
         <form>
             <h1>Questions</h1>
             <MainCategoriesTabs />
-            <Category {...props} />
+            <Category />
         </form>
     );
 };

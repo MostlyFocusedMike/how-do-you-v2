@@ -4,7 +4,7 @@ const handler = (router) => {
         async (req, res) => {
             const { Category } = req.models;
             const categories = await Category.all();
-            res.json(categories);
+            res.camel(categories);
         },
     );
 };

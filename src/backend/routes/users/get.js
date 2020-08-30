@@ -13,7 +13,7 @@ const userHandler = (router) => {
                 .find(userId)
                 .then(user => {
                     console.log('user.sanitize(): ', user.sanitized());
-                    res.send(user.sanitized());
+                    res.camel(user.sanitized());
                 });
         },
     );
