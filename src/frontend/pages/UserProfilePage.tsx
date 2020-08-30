@@ -24,13 +24,8 @@ const UserProfilePage: React.FC<MatchProps> = ({ match }) => {
     }, [match.params.userId]);
 
     useEffect(() => {
-        console.log('loggedInUser in the page: ', loggedInUser);
         if (pageUser && loggedInUser) setIsSameUser(pageUser.id === loggedInUser.id);
     }, [pageUser, loggedInUser]);
-
-    useEffect(() => {
-        console.log('pageUser:', pageUser);
-    }, [pageUser]);
 
     const handleLogout = async (e: React.FormEvent<HTMLButtonElement>) => {
         console.log('clicked: ');

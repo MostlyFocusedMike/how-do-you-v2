@@ -20,10 +20,6 @@ const CategoriesPage: React.FC<MatchProps> = ({ match }) => {
             .then(setCategoryQuestions);
     }, [match]);
 
-    useEffect(() => {
-        console.log('categoryQuestions: ', categoryQuestions);
-    }, [categoryQuestions]);
-
     return (
         <form>
             <h1>Questions</h1>

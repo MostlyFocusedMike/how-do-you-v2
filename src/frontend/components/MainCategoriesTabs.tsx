@@ -11,7 +11,6 @@ const MainCategoriesTabs: React.FC = () => {
             const categoriesDB = await categoryAdapter.getAll();
             if (categoriesDB) setCategories(categoriesDB);
         };
-        console.log('hi');
 
         getCategories();
     }, []);

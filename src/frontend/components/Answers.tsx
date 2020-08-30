@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { AnswerInterface, LanguageInterface } from '../util/interfaces';
 import languageAdapter from '../adapters/language-adapter';
 import Answer from './Answer';
+import AppContext from '../context';
 
 interface propsInterface {
     answers: AnswerInterface[];
@@ -21,17 +22,15 @@ const Answers: React.FC<propsInterface> = ({ answers }) => {
     if (!answers.length) return null;
     const [langHash, setLangHash] = useState<null | LangeHashInterface>(null);
     const [chosenLangId, setChosenLangId] = useState<null | number>(null);
+    const { languages } = useContext(AppContext);
 
     useEffect(() => {
-        const setup = async () => {
-            const languages = await languageAdapter.getAll();
-            if (languages) {
-                createLangHash(setLangHash, languages);
-            }
-        };
-        setChosenLangId(answers[0].languageId);
-        setup();
-    }, []);
+        if (languages) {
+            console.log('hi: ', );
+            createLangHash(setLangHash, languages);
+            setChosenLangId(answers[0].languageId);
+        }
+    }, [languages]);
 
     const handleClick = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -40,7 +39,6 @@ const Answers: React.FC<propsInterface> = ({ answers }) => {
 
 
     const renderButton = () => {
-        console.log('answers: ', answers);
         return answers.map(answer => {
             return <button
                 key={answer.languageId}

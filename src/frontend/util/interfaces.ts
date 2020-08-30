@@ -38,6 +38,7 @@ export interface LanguageInterface extends baseModelInterface {
 }
 
 export interface ContextInterface {
+    languages: null | LanguageInterface[];
     loggedInUser: null | UserInterface;
     setLoggedInUser: (user: UserInterface) => void;
     checkIfLoggedIn: () => void;

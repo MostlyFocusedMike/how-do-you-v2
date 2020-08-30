@@ -1,7 +1,8 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, useEffect } from 'react';
 import authAdapter from '../adapters/auth-adapter';
 import AppContext from '.';
-import { UserInterface, ContextInterface } from '../util/interfaces';
+import { UserInterface, ContextInterface, LanguageInterface } from '../util/interfaces';
+import languageAdapter from '../adapters/language-adapter';
 
 interface ContextProps {
     children: ReactNode;
@@ -9,6 +10,16 @@ interface ContextProps {
 
 const ContextProvider: React.FC<ContextProps> = ({ children }) => {
     const [loggedInUser, setLoggedInUser] = useState<null | UserInterface>(null);
+    const [languages, setLanguages] = useState<null | LanguageInterface[]>(null);
+
+    useEffect(() => {
+        const setup = async () => {
+            const languagesDB = await languageAdapter.getAll();
+            if (languagesDB) setLanguages(languagesDB);
+        };
+
+        setup();
+    }, []);
 
     const checkIfLoggedIn = async () => {
         const cookieData = await authAdapter.reauth();
@@ -24,6 +35,7 @@ const ContextProvider: React.FC<ContextProps> = ({ children }) => {
     };
 
     const context: ContextInterface = {
+        languages,
         loggedInUser,
         setLoggedInUser,
         checkIfLoggedIn,

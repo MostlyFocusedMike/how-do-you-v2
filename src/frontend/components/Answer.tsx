@@ -8,10 +8,9 @@ interface propsInterface {
 }
 
 const Answer: React.FC<propsInterface> = ({ answer, langHash, chosenLangId }) => {
-    console.log('answer: ', answer);
     if (answer.languageId !== chosenLangId) return null;
     return <ol className="answer" key={answer.id}>
-        <p>lang: {langHash[answer.languageId]}</p>
+        <p>Language: {langHash[answer.languageId]}</p>
         <code>{answer.code}</code>
         <hr />
         <p>{answer.text}</p>
