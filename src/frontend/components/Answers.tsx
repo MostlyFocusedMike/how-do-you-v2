@@ -19,7 +19,8 @@ const createLangHash = (setLangHash: React.Dispatch<LangeHashInterface>, langs: 
 
 const Answers: React.FC<propsInterface> = ({ answers }) => {
     if (!answers.length) return null;
-    const [langHash, setLangHash] = useState<LangeHashInterface>(null);
+    const [langHash, setLangHash] = useState<null | LangeHashInterface>(null);
+    const [chosenLangId, setChosenLangId] = useState<null | number>(null);
 
     useEffect(() => {
         const setup = async () => {
@@ -28,17 +29,30 @@ const Answers: React.FC<propsInterface> = ({ answers }) => {
                 createLangHash(setLangHash, languages);
             }
         };
+        setChosenLangId(answers[0].languageId);
         setup();
     }, []);
+
+    const handleClick = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        setChosenLangId(parseInt(e.currentTarget.value, 10));
+    };
+
 
     const renderButton = () => {
         console.log('answers: ', answers);
         return answers.map(answer => {
-            return <button key={answer.languageId}>{langHash[answer.languageId]}</button>;
+            return <button
+                key={answer.languageId}
+                value={answer.languageId}
+                onClick={handleClick}
+            >
+                {langHash[answer.languageId]}
+            </button>;
         });
     };
 
-    if (!langHash) return null;
+    if (!langHash || !chosenLangId) return null;
     return (
         <div>
             { renderButton() }
@@ -49,6 +63,7 @@ const Answers: React.FC<propsInterface> = ({ answers }) => {
                             key={answer.id}
                             answer={answer}
                             langHash={langHash}
+                            chosenLangId={chosenLangId}
                         />;
                     })
                 }
