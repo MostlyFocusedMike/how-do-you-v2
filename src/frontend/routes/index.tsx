@@ -10,7 +10,7 @@ import MainNavBar from '../components/MainNavBar';
 import UserProfilePage from '../pages/UserProfilePage';
 import HomePage from '../pages/HomePage';
 import CategoriesPage from '../pages/CategoriesPage';
-import EditQuestion from '../pages/EditQuestion';
+import EditQuestion from '../pages/QuestionForm';
 
 const Routes = () => {
     return (

@@ -18,3 +18,19 @@ ol {
     margin: 0;
     padding: 0;
 }
+
+input, label {
+    display: block;
+}
+
+label {
+    margin-top: 1rem;
+}
+
+fieldset {
+    border: 2px solid black;
+}
+
+button {
+    display: block;
+}
