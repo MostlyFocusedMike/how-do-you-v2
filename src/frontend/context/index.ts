@@ -4,6 +4,7 @@ import { ContextInterface } from '../util/interfaces';
 const AppContext = React.createContext<ContextInterface>({
     languages: null,
     loggedInUser: null,
+    categories: null,
     setLoggedInUser: () => {},
     checkIfLoggedIn: () => {},
     handleLoginUser: () => {},
