@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const EditQuestion: React.FC = () => {
+    const [answers, setAnswers] = useState<any>([{
+        languageId: 3, // dynamic todo
+
+    }]);
     return (
         <div>
             <h1>Edit Question</h1>

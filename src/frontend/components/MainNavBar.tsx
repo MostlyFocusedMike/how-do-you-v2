@@ -21,6 +21,7 @@ const MainNavBar: React.FC = () => {
             <Link to='/'>Home</Link>
             <Link to='/login'>Login</Link>
             <Link to='/categories/4'>Categories</Link>
+            <Link to='/create'>New Question</Link>
             {currentProfile()}
         </nav>
     );
