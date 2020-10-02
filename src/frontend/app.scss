@@ -19,7 +19,7 @@ ol {
     padding: 0;
 }
 
-input, label {
+input, label, button, select {
     display: block;
 }
 
@@ -29,8 +29,4 @@ label {
 
 fieldset {
     border: 2px solid black;
-}
-
-button {
-    display: block;
 }

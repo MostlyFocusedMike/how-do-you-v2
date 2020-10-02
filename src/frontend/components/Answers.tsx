@@ -26,7 +26,6 @@ const Answers: React.FC<propsInterface> = ({ answers }) => {
 
     useEffect(() => {
         if (languages) {
-            console.log('hi: ', );
             createLangHash(setLangHash, languages);
             setChosenLangId(answers[0].languageId);
         }
