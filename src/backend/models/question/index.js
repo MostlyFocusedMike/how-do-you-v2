@@ -7,6 +7,13 @@ class Question extends ObjectionBoiler {
             .where({ category_id: categoryId })
             .withGraphFetched('answers');
     }
+
+    static getAllAnswersForQuestion(questionId) {
+        return this
+            .query()
+            .where({ id: questionId })
+            .withGraphFetched('answers');
+    }
 }
 
 module.exports = Question;
