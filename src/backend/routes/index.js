@@ -11,6 +11,7 @@ const addAllRoutes = (app) => {
     app.use(require('./users'));
     app.use(require('./categories'));
     app.use(require('./languages'));
+    app.use(require('./questions'));
     app.use(require('./auth'));
 };
 
