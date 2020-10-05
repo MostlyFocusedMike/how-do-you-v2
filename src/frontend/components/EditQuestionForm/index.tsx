@@ -5,25 +5,26 @@ import languageAdapter from '../../adapters/language-adapter';
 interface formProps {
     answers: any;
     setAnswers: any;
+    categoryIdProp?: number;
 }
 
 const EditQuestionForm: React.FC<formProps> = ({
     answers,
     setAnswers,
+    categoryIdProp,
 }) => {
-    const [categories, setCategories] = useState<any[] | null>([]);
-    const [categoryId, setCategoryId] = useState<any>(null);
+    const [categoryId, setCategoryId] = useState<any>(categoryIdProp);
+    const [categories, setCategories] = useState<any[] | null>(null);
     const [languages, setLanguages] = useState<any>(null);
     const [defaultAnswer, setDefaultAnswer] = useState<any>(null);
 
     useEffect(() => {
-        CategoryAdapter.getAll().then(dbCategories => {
-            if (dbCategories) {
-                setCategories(dbCategories);
-                setCategoryId(dbCategories[0].id);
-            }
-        });
+        CategoryAdapter.getAll().then(setCategories);
     }, []);
+
+    useEffect(() => {
+        if (!categoryIdProp && categories) setCategoryId(categories[0].id);
+    }, [categoryIdProp, categories]);
 
     useEffect(() => {
         if (!answers && languages && defaultAnswer) {
@@ -46,15 +47,12 @@ const EditQuestionForm: React.FC<formProps> = ({
 
     const handleAdd = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log('clicked!');
         setAnswers([...answers, { ...defaultAnswer }]);
     };
 
     const handleSave = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log('clicked!');
-        console.log('answers: ', answers);
-        console.log('categoryId: ', categoryId);
+        console.log('answers: ', answers, 'categoryId: ', categoryId);
     };
 
     const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -80,14 +78,20 @@ const EditQuestionForm: React.FC<formProps> = ({
         }
     };
 
+    if (!categoryId || !categories || !answers || !languages) return null;
     return (
         <div>
             <h1>Edit Question</h1>
             <form>
                 <label>What Category</label>
-                <select name="category" id="category" onChange={handleCategoryChange}>
+                <select
+                    name="category"
+                    id="category"
+                    onChange={handleCategoryChange}
+                    value={categoryId}
+                >
                     {
-                        categories && categories.map((category: any) => <option key={category.id} value={category.id}>{category.name}</option>)
+                        categories.map((category: any) => <option key={category.id} value={category.id}>{category.name}</option>)
                     }
                 </select>
                 <label htmlFor="question-content">Question</label>
@@ -105,7 +109,7 @@ const EditQuestionForm: React.FC<formProps> = ({
                                 value={answers[idx].languageId}
                             >
                                 {
-                                    languages && languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
+                                    languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
                                 }
                             </select>
                             <textarea
