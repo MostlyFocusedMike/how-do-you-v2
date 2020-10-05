@@ -42,7 +42,7 @@ const EditQuestionForm: React.FC<formProps> = ({
                 setDefaultAnswer({
                     languageId: langs[0].id,
                     text: '',
-                    answerCode: '',
+                    code: '',
                 });
             }
         });
@@ -76,7 +76,6 @@ const EditQuestionForm: React.FC<formProps> = ({
     };
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        console.log(e.target.value);
         const answersClone = [...answers];
         if (e.target.dataset.idx) {
             const index = parseInt(e.target.dataset.idx, 10);
@@ -107,10 +106,10 @@ const EditQuestionForm: React.FC<formProps> = ({
                    answers && answers.map((answer: any, idx: number) => {
                         const answerId = `answer-${idx}`;
                         return <fieldset key={answerId}>
-                            <label htmlFor="answer-language">Answer Language</label>
+                            <label htmlFor={answerId}>Answer Language</label>
                             <select
                                 name={answerId}
-                                id="cars"
+                                id={answerId}
                                 onChange={handleLangChange}
                                 data-idx={idx}
                                 value={answers[idx].languageId}
@@ -119,12 +118,22 @@ const EditQuestionForm: React.FC<formProps> = ({
                                     languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
                                 }
                             </select>
+                            <label htmlFor={`${answerId}-text`}>Answer Text</label>
+                            <textarea
+                                name={`${answerId}-text`}
+                                data-idx={idx}
+                                id={`${answerId}-text`}
+                                className="text"
+                                value={answers[idx].text}
+                                onChange={handleTextChange}
+                            />
+                            <label htmlFor={`${answerId}-code`}>Answer Code</label>
                             <textarea
                                 name={answerId}
                                 data-idx={idx}
-                                id={answerId}
-                                className="text"
-                                value={answers[idx].text}
+                                id={`${answerId}-code`}
+                                className="code"
+                                value={answers[idx].code}
                                 onChange={handleTextChange}
                             />
                         </fieldset>;
