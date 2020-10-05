@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CategoryAdapter from '../../adapters/category-adapter';
 import languageAdapter from '../../adapters/language-adapter';
+import CategorySelectInput from './SelectInput';
 
 interface formProps {
     answers: any;
@@ -90,16 +91,11 @@ const EditQuestionForm: React.FC<formProps> = ({
             <h1>Edit Question</h1>
             <form>
                 <label>What Category</label>
-                <select
-                    name="category"
-                    id="category"
-                    onChange={handleCategoryChange}
-                    value={categoryId}
-                >
-                    {
-                        categories.map((category: any) => <option key={category.id} value={category.id}>{category.name}</option>)
-                    }
-                </select>
+                <CategorySelectInput
+                    handleCategoryChange={handleCategoryChange}
+                    categoryId={categoryId}
+                    categories={categories}
+                />
                 <label htmlFor="question-content">Question</label>
                 <input type="text" id="question-content" name="question-content" value={question} onChange={handleQuestionChange}/>
                 {
