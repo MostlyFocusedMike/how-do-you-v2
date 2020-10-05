@@ -6,14 +6,17 @@ interface formProps {
     answers: any;
     setAnswers: any;
     categoryIdProp?: number;
+    questionProp?: string;
 }
 
 const EditQuestionForm: React.FC<formProps> = ({
     answers,
     setAnswers,
     categoryIdProp,
+    questionProp = '',
 }) => {
     const [categoryId, setCategoryId] = useState<any>(categoryIdProp);
+    const [question, setQuestion] = useState<string>(questionProp);
     const [categories, setCategories] = useState<any[] | null>(null);
     const [languages, setLanguages] = useState<any>(null);
     const [defaultAnswer, setDefaultAnswer] = useState<any>(null);
@@ -52,7 +55,7 @@ const EditQuestionForm: React.FC<formProps> = ({
 
     const handleSave = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        console.log('answers: ', answers, 'categoryId: ', categoryId);
+        console.log('answers: ', answers, 'categoryId: ', categoryId, question);
     };
 
     const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -66,6 +69,10 @@ const EditQuestionForm: React.FC<formProps> = ({
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setCategoryId(parseInt(e.target.value, 10));
+    };
+
+    const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setQuestion(e.target.value);
     };
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -95,7 +102,7 @@ const EditQuestionForm: React.FC<formProps> = ({
                     }
                 </select>
                 <label htmlFor="question-content">Question</label>
-                <input type="text" id="question-content" name="question-content"/>
+                <input type="text" id="question-content" name="question-content" value={question} onChange={handleQuestionChange}/>
                 {
                    answers && answers.map((answer: any, idx: number) => {
                         const answerId = `answer-${idx}`;
