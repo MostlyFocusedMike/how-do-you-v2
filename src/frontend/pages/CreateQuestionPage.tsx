@@ -3,12 +3,17 @@ import EditQuestionForm from '../components/EditQuestionForm';
 
 const EditQuestion: React.FC = () => {
     const [answers, setAnswers] = useState<any>(null);
+    const answers2 = [{
+        answerCode: "",
+        languageId: 2,
+        text: "eyyyyy",
+    }];
 
     return (
         <>
             <EditQuestionForm
                 setAnswers={setAnswers}
-                answers={answers}
+                answers={answers2}
             />
         </>
     );

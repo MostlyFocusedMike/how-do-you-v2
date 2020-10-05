@@ -26,10 +26,7 @@ const EditQuestionForm: React.FC<formProps> = ({
     }, []);
 
     useEffect(() => {
-        console.log('answers: ', answers);
-        console.log('languages: ', languages);
         if (!answers && languages && defaultAnswer) {
-            console.log('hi?: ');
             setAnswers([defaultAnswer]);
         }
     }, [answers, languages, defaultAnswer]);
@@ -98,27 +95,28 @@ const EditQuestionForm: React.FC<formProps> = ({
                 {
                    answers && answers.map((answer: any, idx: number) => {
                         const answerId = `answer-${idx}`;
-                            return <fieldset key={answerId}>
-                                <label htmlFor="answer-language">Answer Language</label>
-                                <select
-                                    name={answerId}
-                                    id="cars"
-                                    onChange={handleLangChange}
-                                    data-idx={idx}
-                                >
-                                    {
-                                        languages && languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
-                                    }
-                                </select>
-                                <textarea
-                                    name={answerId}
-                                    data-idx={idx}
-                                    id={answerId}
-                                    className="text"
-                                    value={answers[idx].text}
-                                    onChange={handleTextChange}
-                                />
-                            </fieldset>;
+                        return <fieldset key={answerId}>
+                            <label htmlFor="answer-language">Answer Language</label>
+                            <select
+                                name={answerId}
+                                id="cars"
+                                onChange={handleLangChange}
+                                data-idx={idx}
+                                value={answers[idx].languageId}
+                            >
+                                {
+                                    languages && languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
+                                }
+                            </select>
+                            <textarea
+                                name={answerId}
+                                data-idx={idx}
+                                id={answerId}
+                                className="text"
+                                value={answers[idx].text}
+                                onChange={handleTextChange}
+                            />
+                        </fieldset>;
                     })
                 }
                 <button onClick={handleAdd}>Add new Answer</button>
