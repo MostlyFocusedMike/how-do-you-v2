@@ -1,12 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import CategoryAdapter from '../adapters/category-adapter';
-import languageAdapter from '../adapters/language-adapter';
+import React, { useEffect, useState } from 'react';
+import CategoryAdapter from '../../adapters/category-adapter';
+import languageAdapter from '../../adapters/language-adapter';
 
-const EditQuestion: React.FC = () => {
-    const [categories, setCategories] = useState<any[] | null>(null);
-    const [categoryId, setCategoryId] = useState<any>([null]);
-    const [languages, setLanguages] = useState<any[] | null>(null);
-    const [answers, setAnswers] = useState<any[]>([]);
+interface formProps {
+    answers: any;
+    setAnswers: any;
+}
+
+const EditQuestionForm: React.FC<formProps> = ({
+    answers,
+    setAnswers,
+}) => {
+    const [categories, setCategories] = useState<any[] | null>([]);
+    const [categoryId, setCategoryId] = useState<any>(null);
+    const [languages, setLanguages] = useState<any>(null);
     const [defaultAnswer, setDefaultAnswer] = useState<any>(null);
 
     useEffect(() => {
@@ -19,6 +26,15 @@ const EditQuestion: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        console.log('answers: ', answers);
+        console.log('languages: ', languages);
+        if (!answers && languages && defaultAnswer) {
+            console.log('hi?: ');
+            setAnswers([defaultAnswer]);
+        }
+    }, [answers, languages, defaultAnswer]);
+
+    useEffect(() => {
         languageAdapter.getAll().then(langs => {
             if (langs) {
                 setLanguages(langs);
@@ -27,14 +43,9 @@ const EditQuestion: React.FC = () => {
                     text: '',
                     answerCode: '',
                 });
-                console.log('defaultAnswer: ', defaultAnswer);
             }
         });
     }, []);
-
-    useEffect(() => {
-        if (defaultAnswer) setAnswers([defaultAnswer]);
-    }, [defaultAnswer]);
 
     const handleAdd = (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -46,9 +57,20 @@ const EditQuestion: React.FC = () => {
         e.preventDefault();
         console.log('clicked!');
         console.log('answers: ', answers);
-        console.log('languages: ', languages);
-        console.log('categories: ', categories);
         console.log('categoryId: ', categoryId);
+    };
+
+    const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        if (e.target.dataset.idx) {
+            const newAnswers = [...answers];
+            const answerIndex = parseInt(e.target.dataset.idx, 10);
+            newAnswers[answerIndex].languageId = parseInt(e.target.value, 10);
+            setAnswers(newAnswers);
+        }
+    };
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setCategoryId(parseInt(e.target.value, 10));
     };
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -61,24 +83,6 @@ const EditQuestion: React.FC = () => {
         }
     };
 
-    const handleLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log('hi');
-        console.log('e.target.value: ', e.target.value);
-        if (e.target.dataset.idx) {
-            const answerIndex = parseInt(e.target.dataset.idx, 10);
-            answers[answerIndex].languageId = parseInt(e.target.value, 10);
-        } else {
-            console.log('how is there no index?');
-        }
-    };
-
-    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log('hi');
-        console.log('e.target.value: ', e.target.value);
-        console.log('e.target.name: ', e.target.name);
-        setCategoryId(parseInt(e.target.value, 10));
-    };
-
     return (
         <div>
             <h1>Edit Question</h1>
@@ -86,13 +90,13 @@ const EditQuestion: React.FC = () => {
                 <label>What Category</label>
                 <select name="category" id="category" onChange={handleCategoryChange}>
                     {
-                        categories && categories.map(category => <option key={category.id} value={category.id}>{category.name}</option>)
+                        categories && categories.map((category: any) => <option key={category.id} value={category.id}>{category.name}</option>)
                     }
                 </select>
                 <label htmlFor="question-content">Question</label>
                 <input type="text" id="question-content" name="question-content"/>
                 {
-                   answers.map((answer: any, idx: number) => {
+                   answers && answers.map((answer: any, idx: number) => {
                         const answerId = `answer-${idx}`;
                             return <fieldset key={answerId}>
                                 <label htmlFor="answer-language">Answer Language</label>
@@ -103,7 +107,7 @@ const EditQuestion: React.FC = () => {
                                     data-idx={idx}
                                 >
                                     {
-                                        languages && languages.map(langauge => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
+                                        languages && languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
                                     }
                                 </select>
                                 <textarea
@@ -124,4 +128,4 @@ const EditQuestion: React.FC = () => {
     );
 };
 
-export default EditQuestion;
+export default EditQuestionForm;
