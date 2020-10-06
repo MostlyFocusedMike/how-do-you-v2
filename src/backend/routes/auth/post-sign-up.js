@@ -21,6 +21,6 @@ const handler = (router) => {
             },
         )(req, res, next);
     });
-}
+};
 
 module.exports = handler;

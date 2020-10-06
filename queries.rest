@@ -32,3 +32,24 @@ Content-Type: application/json
 
 #####################
 POST http://localhost:8001/api/v1/logout
+
+#####################
+POST http://localhost:8001/api/v1/questions
+Content-Type: application/json
+
+{
+    "category_id":1,
+    "content":"does this shit work?",
+    "answers":
+    [
+        {
+            "code":"a[]",
+            "language_id":2,
+            "text":"yes"},
+        {
+            "code":"c[]",
+            "language_id":1,
+            "text":"yeah"
+        }
+    ]
+}
