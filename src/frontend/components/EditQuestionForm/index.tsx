@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import CategoryAdapter from '../../adapters/category-adapter';
+import categoryAdapter from '../../adapters/category-adapter';
 import languageAdapter from '../../adapters/language-adapter';
+import questionAdapter from '../../adapters/question-adapter';
 import CategorySelectInput from './SelectInput';
 import QuestionFormAnswerInputs from './QuestionFormAnswerInputs';
+import {
+    QuestionInterfaceToDB,
+    AnswerInterfaceToDB,
+} from '../../util/interfaces';
+
 
 interface formProps {
-    answers: any;
+    answers: AnswerInterfaceToDB[];
     setAnswers: any;
     categoryIdProp?: number;
     questionProp?: string;
@@ -24,7 +30,7 @@ const EditQuestionForm: React.FC<formProps> = ({
     const [defaultAnswer, setDefaultAnswer] = useState<any>(null);
 
     useEffect(() => {
-        CategoryAdapter.getAll().then(setCategories);
+        categoryAdapter.getAll().then(setCategories);
     }, []);
 
     useEffect(() => {
@@ -55,14 +61,15 @@ const EditQuestionForm: React.FC<formProps> = ({
         setAnswers([...answers, { ...defaultAnswer }]);
     };
 
-    const handleSave = (e: React.FormEvent<HTMLButtonElement>) => {
+    const handleSave = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const body = {
+        const body: QuestionInterfaceToDB = {
             category_id: categoryId,
             content: question,
             answers,
         };
-        console.log('body', JSON.stringify(body));
+        const response = await questionAdapter.createWithAnswers(body);
+        console.log('response: ', response);
     };
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -84,7 +91,10 @@ const EditQuestionForm: React.FC<formProps> = ({
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const answersClone = [...answers];
         if (e.target.dataset.idx) {
-            answersClone[parseInt(e.target.dataset.idx, 10)][e.target.className] = e.target.value;
+            const name = e.currentTarget.className;
+            // Super dumb way to get around TypeScript throwing a hissyfit over dynamic access
+            if (name === 'code') answersClone[parseInt(e.target.dataset.idx, 10)].code = e.target.value;
+            if (name === 'text') answersClone[parseInt(e.target.dataset.idx, 10)].text = e.target.value;
             setAnswers(answersClone);
         }
     };

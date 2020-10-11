@@ -48,5 +48,6 @@ module.exports = {
         'global-require': 'off',
         'consistent-return': 'off',
         'array-callback-return': 'off',
+        'camelcase': 'off',
     },
 };
