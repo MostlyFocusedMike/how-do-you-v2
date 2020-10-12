@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AnswerInterface, LanguageInterface } from '../util/interfaces';
-import languageAdapter from '../adapters/language-adapter';
 import Answer from './Answer';
 import AppContext from '../context';
 
@@ -27,7 +26,7 @@ const Answers: React.FC<propsInterface> = ({ answers }) => {
     useEffect(() => {
         if (languages) {
             createLangHash(setLangHash, languages);
-            setChosenLangId(answers[0].languageId);
+            setChosenLangId(answers[0].language_id);
         }
     }, [languages]);
 
@@ -40,15 +39,15 @@ const Answers: React.FC<propsInterface> = ({ answers }) => {
     const renderButton = () => {
         return answers.map(answer => {
             return <button
-                key={answer.languageId}
-                value={answer.languageId}
+                key={answer.language_id}
+                value={answer.language_id}
                 onClick={handleClick}
             >
-                {langHash[answer.languageId]}
+                {langHash[answer.language_id]}
             </button>;
         });
     };
-
+    console.log('langHash: ', chosenLangId);
     if (!langHash || !chosenLangId) return null;
     return (
         <div>

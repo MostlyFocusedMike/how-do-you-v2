@@ -4,7 +4,7 @@ const handler = (router) => {
         async (req, res) => {
             const { Language } = req.models;
             const languages = await Language.all();
-            res.camel(languages);
+            res.json(languages);
         },
     );
 };

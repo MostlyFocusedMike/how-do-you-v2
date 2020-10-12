@@ -16,7 +16,7 @@ const EditQuestion: React.FC = () => {
     return (
         <>
             <EditQuestionForm
-                categoryIdProp={2}
+                category_idProp={2}
                 questionProp='does this shit work?'
                 setAnswers={setAnswers}
                 answers={answers}

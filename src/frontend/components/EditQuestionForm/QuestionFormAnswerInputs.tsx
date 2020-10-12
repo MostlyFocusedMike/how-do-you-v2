@@ -24,7 +24,7 @@ const QuestionFormAnswerInputs: React.FC<QuestionFormAnswerInputs> = ({
                         id={answerId}
                         onChange={handleLangChange}
                         data-idx={idx}
-                        value={answers[idx].languageId}
+                        value={answers[idx].language_id}
                     >
                         {
                             languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)

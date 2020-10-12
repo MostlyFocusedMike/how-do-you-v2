@@ -1,17 +1,17 @@
 const ObjectionBoiler = require('./objection-boiler');
 
 class Question extends ObjectionBoiler {
-    static getAllQuestionsFromCategory(categoryId) {
+    static getAllQuestionsFromCategory(category_id) {
         return this
             .query()
-            .where({ category_id: categoryId })
+            .where({ category_id: category_id })
             .withGraphFetched('answers');
     }
 
-    static getAllAnswersForQuestion(questionId) {
+    static getAllAnswersForQuestion(question_id) {
         return this
             .query()
-            .where({ id: questionId })
+            .where({ id: question_id })
             .withGraphFetched('answers');
     }
 }

@@ -5,25 +5,25 @@ import questionAdapter from '../../adapters/question-adapter';
 import CategorySelectInput from './SelectInput';
 import QuestionFormAnswerInputs from './QuestionFormAnswerInputs';
 import {
-    QuestionInterfaceToDB,
-    AnswerInterfaceToDB,
+    PreDBQuestionWithAnswersInterface,
+    PreDBAnswerInterface,
 } from '../../util/interfaces';
 
 
 interface formProps {
-    answers: AnswerInterfaceToDB[];
+    answers: PreDBAnswerInterface[];
     setAnswers: any;
-    categoryIdProp?: number;
+    category_idProp?: number;
     questionProp?: string;
 }
 
 const EditQuestionForm: React.FC<formProps> = ({
     answers,
     setAnswers,
-    categoryIdProp,
+    category_idProp,
     questionProp = '',
 }) => {
-    const [categoryId, setCategoryId] = useState<any>(categoryIdProp);
+    const [category_id, setcategory_id] = useState<any>(category_idProp);
     const [question, setQuestion] = useState<string>(questionProp);
     const [categories, setCategories] = useState<any[] | null>(null);
     const [languages, setLanguages] = useState<any>(null);
@@ -34,8 +34,8 @@ const EditQuestionForm: React.FC<formProps> = ({
     }, []);
 
     useEffect(() => {
-        if (!categoryIdProp && categories) setCategoryId(categories[0].id);
-    }, [categoryIdProp, categories]);
+        if (!category_idProp && categories) setcategory_id(categories[0].id);
+    }, [category_idProp, categories]);
 
     useEffect(() => {
         if (!answers && languages && defaultAnswer) {
@@ -63,8 +63,8 @@ const EditQuestionForm: React.FC<formProps> = ({
 
     const handleSave = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const body: QuestionInterfaceToDB = {
-            category_id: categoryId,
+        const body: PreDBQuestionWithAnswersInterface = {
+            category_id,
             content: question,
             answers,
         };
@@ -73,7 +73,7 @@ const EditQuestionForm: React.FC<formProps> = ({
     };
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setCategoryId(parseInt(e.target.value, 10));
+        setcategory_id(parseInt(e.target.value, 10));
     };
 
     const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -99,7 +99,7 @@ const EditQuestionForm: React.FC<formProps> = ({
         }
     };
 
-    if (!categoryId || !categories || !answers || !languages) return null;
+    if (!category_id || !categories || !answers || !languages) return null;
 
     return (
         <div>
@@ -108,7 +108,7 @@ const EditQuestionForm: React.FC<formProps> = ({
                 <label>What Category</label>
                 <CategorySelectInput
                     handleCategoryChange={handleCategoryChange}
-                    categoryId={categoryId}
+                    category_id={category_id}
                     categories={categories}
                 />
                 <label htmlFor="question-content">Question</label>

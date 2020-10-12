@@ -1,5 +1,5 @@
 import fetcher from '../util/fetcher';
-import { CategoryInterface, QuestionInterface } from '../util/interfaces';
+import { CategoryInterface, QuestionWithAnswersInterface } from '../util/interfaces';
 
 const optionsForGet: RequestInit = {
     method: 'GET',
@@ -15,8 +15,8 @@ const categoryAdapter = {
         return fetcher<CategoryInterface[]>('/api/v1/categories', optionsForGet);
     },
 
-    getAllQuestionsForCategory: async (categoryId: number) => {
-        return fetcher<QuestionInterface[]>(`/api/v1/categories/${categoryId}/questions`, optionsForGet);
+    getAllQuestionsForCategory: async (category_id: number) => {
+        return fetcher<QuestionWithAnswersInterface[]>(`/api/v1/categories/${category_id}/questions`, optionsForGet);
     },
 };
 

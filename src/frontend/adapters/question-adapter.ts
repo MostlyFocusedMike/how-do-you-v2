@@ -1,11 +1,11 @@
 import fetcher from '../util/fetcher';
 import {
-    QuestionInterface,
-    QuestionInterfaceToDB,
+    QuestionWithAnswersInterface,
+    PreDBQuestionWithAnswersInterface,
 } from '../util/interfaces';
 
 const questionAdapter = {
-    createWithAnswers: async (QuestionWithAnswers: QuestionInterfaceToDB) => {
+    createWithAnswers: async (QuestionWithAnswers: PreDBQuestionWithAnswersInterface) => {
         const options: RequestInit = {
             method: 'POST',
             credentials: 'include',
@@ -15,7 +15,7 @@ const questionAdapter = {
                 'Content-Type': 'application/json',
             },
         };
-        return fetcher<QuestionInterface>('/api/v1/questions', options);
+        return fetcher<QuestionWithAnswersInterface>('/api/v1/questions', options);
     },
 };
 

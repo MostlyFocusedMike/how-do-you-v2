@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { CategoryInterface, QuestionInterface } from '../util/interfaces';
+import React from 'react';
+import { QuestionWithAnswersInterface } from '../util/interfaces';
 import Question from './Question';
 
 interface propsInterface {
-    categoryQuestions: QuestionInterface[]
+    categoryQuestions: QuestionWithAnswersInterface[]
 }
 
 const Category: React.FC<propsInterface> = ({ categoryQuestions }) => {
-
     return (
         <ul>
             {

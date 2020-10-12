@@ -21,7 +21,7 @@ const Routes = () => {
                 <Route path="/login" component={ LoginPage } />
                 <Route path="/users/:userId" component={ UserProfilePage } />
                 <Route path="/create" component={ CreateQuestionpage } />
-                <Route path="/categories/:categoryId" component={ CategoriesPage } />
+                <Route path="/categories/:category_id" component={ CategoriesPage } />
                 <Route path="*" exact component={ HomePage } />
             </Switch>
         </Router>

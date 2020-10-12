@@ -3,20 +3,20 @@ import { RouteComponentProps } from 'react-router';
 import MainCategoriesTabs from '../components/MainCategoriesTabs';
 import Category from '../components/Category';
 import categoryAdapter from '../adapters/category-adapter';
-import { CategoryInterface, QuestionInterface } from '../util/interfaces';
+import { QuestionWithAnswersInterface } from '../util/interfaces';
 
 interface MatchParams {
-    categoryId: string;
+    category_id: string;
 }
 
 interface MatchProps extends RouteComponentProps<MatchParams> {
 }
 
 const CategoriesPage: React.FC<MatchProps> = ({ match }) => {
-    const [categoryQuestions, setCategoryQuestions] = useState<QuestionInterface[] | null>(null);
+    const [categoryQuestions, setCategoryQuestions] = useState<QuestionWithAnswersInterface[] | null>(null);
     useEffect(() => {
         categoryAdapter
-            .getAllQuestionsForCategory(parseInt(match.params.categoryId, 10))
+            .getAllQuestionsForCategory(parseInt(match.params.category_id, 10))
             .then(setCategoryQuestions);
     }, [match]);
 

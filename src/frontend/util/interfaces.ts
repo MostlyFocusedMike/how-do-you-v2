@@ -1,15 +1,16 @@
 interface baseModelInterface {
     id: number;
-    updatedAt?: string;
-    createdAt?: string;
-    updated_at?: string;
-    created_at?: string;
+    updated_at: string;
+    created_at: string;
 }
-
 
 export interface UserInterface extends baseModelInterface {
     role: string;
     email: string;
+}
+
+export interface LanguageInterface extends baseModelInterface {
+    name: string;
 }
 
 export interface CategoryInterface extends baseModelInterface {
@@ -17,40 +18,38 @@ export interface CategoryInterface extends baseModelInterface {
     questions?: QuestionInterface[];
 }
 
-export interface QuestionInterface extends baseModelInterface {
-    content: string;
-    categoryId: number;
-    answers?: AnswerInterface[];
-}
-
-export interface QuestionInterfaceToDB {
+// Questions
+export interface PreDBQuestionInterface {
     content: string;
     category_id: number;
-    answers?: AnswerInterfaceToDB[];
 }
 
-export interface QuestionWithAnswersInterface extends baseModelInterface {
+export interface PreDBQuestionWithAnswersInterface extends PreDBQuestionInterface {
+    answers: PreDBAnswerInterface[];
+}
+
+export interface QuestionInterface extends baseModelInterface {
     content: string;
+    category_id: number;
+}
+
+export interface QuestionWithAnswersInterface extends QuestionInterface {
     answers: AnswerInterface[];
 }
 
-export interface AnswerInterface extends baseModelInterface {
-    id: number;
-    code: string;
-    text: string;
-    languageId: number;
-    questionId: number;
-}
-
-export interface AnswerInterfaceToDB {
+// Answers
+export interface PreDBAnswerInterface {
     code: string;
     text: string;
     language_id: number;
     question_id: number;
 }
 
-export interface LanguageInterface extends baseModelInterface {
-    name: string;
+export interface AnswerInterface extends baseModelInterface {
+    code: string;
+    text: string;
+    language_id: number;
+    question_id: number;
 }
 
 export interface ContextInterface {

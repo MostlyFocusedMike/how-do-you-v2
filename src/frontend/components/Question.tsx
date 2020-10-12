@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { QuestionInterface } from '../util/interfaces';
+import { QuestionWithAnswersInterface } from '../util/interfaces';
 import Answers from './Answers';
 
 interface propsInterface {
-    question: QuestionInterface;
+    question: QuestionWithAnswersInterface;
 }
 
 const Question: React.FC<propsInterface> = ({ question }) => {

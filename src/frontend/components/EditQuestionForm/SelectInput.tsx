@@ -2,20 +2,20 @@ import React from 'react';
 
 interface SelectProps {
     handleCategoryChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-    categoryId: number;
+    category_id: number;
     categories: any[];
 }
 
 const CategorySelectInput: React.FC<SelectProps> = ({
     handleCategoryChange,
-    categoryId,
+    category_id,
     categories,
 }) => {
     return <select
         name="category"
         id="category"
         onChange={handleCategoryChange}
-        value={categoryId}
+        value={category_id}
     >
         {
             categories.map((category: any) => <option key={category.id} value={category.id}>{category.name}</option>)
