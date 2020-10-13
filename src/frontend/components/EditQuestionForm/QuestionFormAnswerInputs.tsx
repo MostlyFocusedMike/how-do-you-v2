@@ -1,10 +1,12 @@
 import React from 'react';
+import { AnswerInterface } from '../../util/interfaces';
 
 interface QuestionFormAnswerInputs {
     handleLangChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     answers: any[];
     languages: any[];
     handleTextChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    removeAnswer: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
 const QuestionFormAnswerInputs: React.FC<QuestionFormAnswerInputs> = ({
@@ -12,16 +14,17 @@ const QuestionFormAnswerInputs: React.FC<QuestionFormAnswerInputs> = ({
     answers,
     languages,
     handleTextChange,
+    removeAnswer,
 }) => {
     return <>
         {
             answers.map((answer: any, idx: number) => {
-                const answerId = `answer-${idx}`;
-                return <fieldset key={answerId}>
-                    <label htmlFor={answerId}>Answer Language</label>
+                const answerIdx = `answer-${idx}`;
+                return <fieldset key={answerIdx}>
+                    <label htmlFor={answerIdx}>Answer Language</label>
                     <select
-                        name={answerId}
-                        id={answerId}
+                        name={answerIdx}
+                        id={answerIdx}
                         onChange={handleLangChange}
                         data-idx={idx}
                         value={answers[idx].language_id}
@@ -30,24 +33,25 @@ const QuestionFormAnswerInputs: React.FC<QuestionFormAnswerInputs> = ({
                             languages.map((langauge: any) => <option key={langauge.id} value={langauge.id}>{langauge.name}</option>)
                         }
                     </select>
-                    <label htmlFor={`${answerId}-text`}>Answer Text</label>
+                    <label htmlFor={`${answerIdx}-text`}>Answer Text</label>
                     <textarea
-                        name={`${answerId}-text`}
+                        name={`${answerIdx}-text`}
                         data-idx={idx}
-                        id={`${answerId}-text`}
+                        id={`${answerIdx}-text`}
                         className="text"
                         value={answers[idx].text}
                         onChange={handleTextChange}
                     />
-                    <label htmlFor={`${answerId}-code`}>Answer Code</label>
+                    <label htmlFor={`${answerIdx}-code`}>Answer Code</label>
                     <textarea
-                        name={answerId}
+                        name={answerIdx}
                         data-idx={idx}
-                        id={`${answerId}-code`}
+                        id={`${answerIdx}-code`}
                         className="code"
                         value={answers[idx].code}
                         onChange={handleTextChange}
                     />
+                    <button onClick={removeAnswer} data-idx={idx} data-answer-id={answer.id}>Remove Answer</button>
                 </fieldset>;
             })
         }

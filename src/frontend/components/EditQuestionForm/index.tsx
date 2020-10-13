@@ -23,7 +23,7 @@ const EditQuestionForm: React.FC<formProps> = ({
     category_idProp,
     questionProp = '',
 }) => {
-    const [category_id, setcategory_id] = useState<any>(category_idProp);
+    const [category_id, setCategoryId] = useState<any>(category_idProp);
     const [question, setQuestion] = useState<string>(questionProp);
     const [categories, setCategories] = useState<any[] | null>(null);
     const [languages, setLanguages] = useState<any>(null);
@@ -34,7 +34,7 @@ const EditQuestionForm: React.FC<formProps> = ({
     }, []);
 
     useEffect(() => {
-        if (!category_idProp && categories) setcategory_id(categories[0].id);
+        if (!category_idProp && categories) setCategoryId(categories[0].id);
     }, [category_idProp, categories]);
 
     useEffect(() => {
@@ -61,6 +61,19 @@ const EditQuestionForm: React.FC<formProps> = ({
         setAnswers([...answers, { ...defaultAnswer }]);
     };
 
+    const removeAnswer = (e: React.FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const { answerIndex, idx } = e.currentTarget.dataset;
+        console.log('clicked: ', e.currentTarget.dataset.idx);
+        console.log('clicked: ', e.currentTarget.dataset.answerId);
+        if (!answerIndex && idx !== undefined) { // not saved in DB, only state needs manipulating
+            const answersClone = [...answers];
+            answersClone.splice(parseInt(idx, 10), 1);
+            console.log('answersClone: ', answersClone);
+            setAnswers(answersClone);
+        }
+    };
+
     const handleSave = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         const body: PreDBQuestionWithAnswersInterface = {
@@ -73,7 +86,7 @@ const EditQuestionForm: React.FC<formProps> = ({
     };
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setcategory_id(parseInt(e.target.value, 10));
+        setCategoryId(parseInt(e.target.value, 10));
     };
 
     const handleQuestionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,6 +100,7 @@ const EditQuestionForm: React.FC<formProps> = ({
             setAnswers(newAnswers);
         }
     };
+
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const answersClone = [...answers];
@@ -118,6 +132,7 @@ const EditQuestionForm: React.FC<formProps> = ({
                         answers={answers}
                         languages={languages}
                         handleTextChange={handleTextChange}
+                        removeAnswer={removeAnswer}
                 />
                 <button onClick={handleAdd}>Add new Answer</button>
                 <button onClick={handleSave}>Save</button>
