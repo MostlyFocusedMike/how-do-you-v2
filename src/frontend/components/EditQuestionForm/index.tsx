@@ -66,11 +66,15 @@ const EditQuestionForm: React.FC<formProps> = ({
         const { answerIndex, idx } = e.currentTarget.dataset;
         console.log('clicked: ', e.currentTarget.dataset.idx);
         console.log('clicked: ', e.currentTarget.dataset.answerId);
-        if (!answerIndex && idx !== undefined) { // not saved in DB, only state needs manipulating
-            const answersClone = [...answers];
-            answersClone.splice(parseInt(idx, 10), 1);
-            console.log('answersClone: ', answersClone);
-            setAnswers(answersClone);
+        if (!answerIndex) { // not saved in DB, only state needs manipulating
+            if (idx !== undefined) {
+                const answersClone = [...answers];
+                answersClone.splice(parseInt(idx, 10), 1);
+                console.log('answersClone: ', answersClone);
+                setAnswers(answersClone);
+            }
+        } else {
+
         }
     };
 
