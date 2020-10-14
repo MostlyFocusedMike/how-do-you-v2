@@ -9,12 +9,11 @@ const optionsForDelete: RequestInit = {
     },
 };
 
-interface DeleteInterface {
-    msg: string;
-}
+type DeleteResponse = {}
+
 const languageAdapter = {
     delete: async (id: number) => {
-        return fetcher<DeleteInterface>(`/api/v1/answers/${id}`, optionsForDelete);
+        return fetcher<DeleteResponse>(`/api/v1/answers/${id}`, optionsForDelete);
     },
 };
 
