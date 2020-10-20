@@ -49,5 +49,6 @@ module.exports = {
         'consistent-return': 'off',
         'array-callback-return': 'off',
         'camelcase': 'off',
+        'no-alert': 'off',
     },
 };

@@ -8,6 +8,7 @@ import {
     PreDBQuestionWithAnswersInterface,
     PreDBAnswerInterface,
 } from '../../util/interfaces';
+import answerAdapter from '../../adapters/answer-adapter';
 
 
 interface formProps {
@@ -61,20 +62,19 @@ const EditQuestionForm: React.FC<formProps> = ({
         setAnswers([...answers, { ...defaultAnswer }]);
     };
 
-    const removeAnswer = (e: React.FormEvent<HTMLButtonElement>) => {
+    const removeAnswer = async (e: React.FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
-        const { answerIndex, idx } = e.currentTarget.dataset;
-        console.log('clicked: ', e.currentTarget.dataset.idx);
-        console.log('clicked: ', e.currentTarget.dataset.answerId);
-        if (!answerIndex) { // not saved in DB, only state needs manipulating
-            if (idx !== undefined) {
-                const answersClone = [...answers];
-                answersClone.splice(parseInt(idx, 10), 1);
-                console.log('answersClone: ', answersClone);
-                setAnswers(answersClone);
+        const { answerId, answerIndex } = e.currentTarget.dataset;
+        if (answerIndex !== undefined) { // this should always be defined, TS is just particular
+            try {
+                if (answerId) await answerAdapter.delete(parseInt(answerIndex, 10)); // if in DB, delete it there too
+            } catch (err) {
+                alert('Could Not delete answer from Database');
+                console.log(err);
             }
-        } else {
-
+            const answersClone = [...answers];
+            answersClone.splice(parseInt(answerIndex, 10), 1);
+            setAnswers(answersClone);
         }
     };
 

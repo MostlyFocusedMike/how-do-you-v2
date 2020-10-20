@@ -51,7 +51,7 @@ const QuestionFormAnswerInputs: React.FC<QuestionFormAnswerInputs> = ({
                         value={answers[idx].code}
                         onChange={handleTextChange}
                     />
-                    <button onClick={removeAnswer} data-idx={idx} data-answer-id={answer.id}>Remove Answer</button>
+                    <button onClick={removeAnswer} data-answer-index={idx} data-answer-id={answer.id}>Remove Answer</button>
                 </fieldset>;
             })
         }

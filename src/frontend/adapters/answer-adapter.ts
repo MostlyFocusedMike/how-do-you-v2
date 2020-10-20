@@ -11,10 +11,10 @@ const optionsForDelete: RequestInit = {
 
 type DeleteResponse = {}
 
-const languageAdapter = {
+const answerAdapter = {
     delete: async (id: number) => {
         return fetcher<DeleteResponse>(`/api/v1/answers/${id}`, optionsForDelete);
     },
 };
 
-export default languageAdapter;
+export default answerAdapter;
