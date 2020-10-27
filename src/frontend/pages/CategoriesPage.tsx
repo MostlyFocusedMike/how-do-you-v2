@@ -6,7 +6,7 @@ import categoryAdapter from '../adapters/category-adapter';
 import { QuestionWithAnswersInterface } from '../util/interfaces';
 
 interface MatchParams {
-    category_id: string;
+    categoryId: string;
 }
 
 interface MatchProps extends RouteComponentProps<MatchParams> {
@@ -16,7 +16,7 @@ const CategoriesPage: React.FC<MatchProps> = ({ match }) => {
     const [categoryQuestions, setCategoryQuestions] = useState<QuestionWithAnswersInterface[] | null>(null);
     useEffect(() => {
         categoryAdapter
-            .getAllQuestionsForCategory(parseInt(match.params.category_id, 10))
+            .getAllQuestionsForCategory(parseInt(match.params.categoryId, 10))
             .then(setCategoryQuestions);
     }, [match]);
 

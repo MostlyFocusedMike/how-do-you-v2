@@ -1,9 +1,9 @@
 const handler = (router) => {
     router.get(
-        '/api/v1/questions/:question_id',
+        '/api/v1/questions/:questionId',
         async (req, res) => {
             const { Question } = req.models;
-            const questions = await Question.getAllAnswersForQuestion(req.params.question_id);
+            const questions = await Question.getAllAnswersForQuestion(req.params.questionId);
 
             res.json(questions);
         },
