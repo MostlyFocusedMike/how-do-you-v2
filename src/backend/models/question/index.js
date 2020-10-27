@@ -1,10 +1,10 @@
 const ObjectionBoiler = require('./objection-boiler');
 
 class Question extends ObjectionBoiler {
-    static getAllQuestionsFromCategory(category_id) {
+    static getAllQuestionsFromCategory(categoryId) {
         return this
             .query()
-            .where({ category_id: category_id })
+            .where({ category_id: categoryId })
             .withGraphFetched('answers');
     }
 
@@ -12,7 +12,8 @@ class Question extends ObjectionBoiler {
         return this
             .query()
             .where({ id: question_id })
-            .withGraphFetched('answers');
+            .withGraphFetched('answers')
+            .first();
     }
 }
 
